@@ -6,18 +6,18 @@ import spock.lang.Subject
 import spock.lang.Title
 
 @Subject(Ingredient)
-@Title('Ingredients needed to make coffee')
+@Title('Ingredients for coffee drinks')
 class IngredientSpec extends Specification {
 
-    def 'should have all main ingredients'() {
+    def 'should have the necessary products in the list of ingredients'() {
 
-        given: 'description of all ingredients as a set'
+        given: 'description of all ingredients'
         def ingredients = Ingredient.values()*.description as Set
 
-        expect: 'required ingredient is presented'
+        expect: 'the required product is present in the list of ingredients'
         product in ingredients
 
-        where: 'three main ingredients are'
+        where: 'a list of products required for the preparation of coffee drinks'
         product << ['water', 'milk', 'coffee beans']
     }
 
