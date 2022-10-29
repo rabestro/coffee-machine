@@ -15,6 +15,15 @@ dependencies {
     // Spock Framework
     testImplementation 'org.spockframework:spock-core:2.3-groovy-3.0'
     testImplementation 'org.codehaus.groovy:groovy-all:3.0.13'
+
+    // Spock Reports
+    testRuntimeClasspath('com.athaydes:spock-reports:2.3.1-groovy-3.0') {
+        transitive = false // this avoids affecting your version of Groovy/Spock
+    }
+
+    // Required for spock-reports
+    testImplementation 'org.slf4j:slf4j-api:2.0.3'
+    testRuntimeClasspath 'org.slf4j:slf4j-simple:2.0.3'
 }
 
 test {
