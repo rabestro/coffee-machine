@@ -1,6 +1,6 @@
-package lv.id.jc.machine
+package lv.id.jc.machine.domain
 
-
+import lv.id.jc.machine.domain.Ingredient
 import spock.lang.Specification
 import spock.lang.Subject
 import spock.lang.Title
