@@ -29,12 +29,19 @@ class IngredientsUnitStatusSpec extends Specification {
         actual == expected
 
         where: 'initial volume of ingredients and expected status report'
-        initial                                      | expected
-        []                                           | [(Water): 0, (Milk): 0, (CoffeeBeans): 0]
-        [(Water): 1000]                              | [(Water): 1000, (Milk): 0, (CoffeeBeans): 0]
-        [(Milk): 500]                                | [(Water): 0, (Milk): 500, (CoffeeBeans): 0]
-        [(CoffeeBeans): 275]                         | [(Water): 0, (Milk): 0, (CoffeeBeans): 275]
-        [(Water): 2500, (CoffeeBeans): 385]          | [(Water): 2500, (Milk): 0, (CoffeeBeans): 385]
-        [(Water): 75, (Milk): 80, (CoffeeBeans): 95] | [(Water): 75, (Milk): 80, (CoffeeBeans): 95]
+        initial                                      | water | milk | beans
+        []                                           | 0     | 0    | 0
+        [(Water): 1000]                              | 1000  | 0    | 0
+        [(Milk): 500]                                | 0     | 500  | 0
+        [(CoffeeBeans): 275]                         | 0     | 0    | 275
+        [(Water): 2500, (CoffeeBeans): 385]          | 2500  | 0    | 385
+        [(Water): 75, (Milk): 80, (CoffeeBeans): 95] | 75    | 80   | 95
+
+        expected = """
+$water ml of water
+$milk ml of milk
+$beans g of coffee beans
+""".strip()
+
     }
 }

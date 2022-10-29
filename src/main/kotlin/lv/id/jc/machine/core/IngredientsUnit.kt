@@ -13,7 +13,8 @@ class IngredientsUnit(ingredients: Map<Ingredient, Int> = emptyMap()) {
         containers[ingredient] = containers.getOrDefault(ingredient, 0) + volume
     }
 
-    fun status(): Map<Ingredient, Int> {
-        return Ingredient.values().associateWith { containers.getOrDefault(it, 0) }
-    }
+    fun status() = Ingredient.values()
+        .joinToString("\n")
+        { "${containers.getOrDefault(it, 0)} ${it.unit} of ${it.description}" }
+
 }

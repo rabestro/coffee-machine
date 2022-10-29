@@ -1,11 +1,7 @@
 package lv.id.jc.machine.domain
 
-import lv.id.jc.machine.domain.Coffee
-import spock.lang.Narrative
-import spock.lang.See
-import spock.lang.Specification
-import spock.lang.Subject
-import spock.lang.Title
+
+import spock.lang.*
 
 import static lv.id.jc.machine.domain.Ingredient.*
 
