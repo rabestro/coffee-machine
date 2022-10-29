@@ -15,15 +15,27 @@ class IngredientSpec extends Specification {
         def ingredients = Ingredient.values()*.description as Set
 
         expect: 'required ingredient is presented'
-        ingredient in ingredients
+        product in ingredients
 
         where: 'three main ingredients are'
-        ingredient << ["water", "milk", "coffee beans"]
+        product << ['water', 'milk', 'coffee beans']
     }
 
     def 'should set units of measurement for each of the ingredients'() {
 
-        expect: 'the correct unit of measurement is set for each of the ingredients'
+        when: 'we find the ingredient by its description'
+        def ingredient = Ingredient.values().find { it.description == product }
 
+        then: 'ingredient should be found'
+        ingredient
+
+        and: 'the correct unit of measurement is set for the ingredient'
+        ingredient.unit == expected
+
+        where:
+        product        | expected
+        'water'        | 'ml'
+        'milk'         | 'ml'
+        'coffee beans' | 'gr'
     }
 }
