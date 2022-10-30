@@ -17,7 +17,13 @@ stateDiagram-v2
             coffee --> [*]: back
         [*] --> coffee
     }
-
+    note right of Buy
+        I have enough resources, making you a coffee!
+    end note
+    note right of Buy
+        Sorry, not enough water!
+    end note
+    
     Fill: Replenishment
     state Fill {
         beans: coffee beans
