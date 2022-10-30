@@ -1,7 +1,9 @@
 package lv.id.jc.machine.core
 
 import lv.id.jc.machine.domain.Ingredient
+import org.junit.Ignore
 import spock.lang.Narrative
+import spock.lang.PendingFeature
 import spock.lang.Specification
 import spock.lang.Subject
 import spock.lang.Title
@@ -17,6 +19,7 @@ So that the coffee machine can prepare the necessary coffee drinks
 @Subject(IngredientsUnit)
 class IngredientsUnitRefillSpec extends Specification {
 
+    @PendingFeature
     def 'should replenish the specified ingredient in the ingredients unit'() {
 
         given: 'an ingredient block with a particular initial amount of ingredients'
