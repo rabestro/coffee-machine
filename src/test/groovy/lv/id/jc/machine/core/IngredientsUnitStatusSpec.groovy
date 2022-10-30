@@ -38,10 +38,10 @@ class IngredientsUnitStatusSpec extends Specification {
         [(Water): 75, (Milk): 80, (CoffeeBeans): 95] | 75    | 80   | 95
 
         expected = """
-$water ml of water
-$milk ml of milk
-$beans g of coffee beans
-""".strip()
+            $water ml of water
+            $milk ml of milk
+            $beans g of coffee beans
+            """.stripIndent().strip()
 
     }
 }
