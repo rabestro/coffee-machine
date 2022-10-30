@@ -1,4 +1,4 @@
-package lv.id.jc.machine
+package lv.id.jc.machine.domain
 
 
 import spock.lang.Specification
@@ -36,6 +36,6 @@ class IngredientSpec extends Specification {
         product        | expected
         'water'        | 'ml'
         'milk'         | 'ml'
-        'coffee beans' | 'gr'
+        'coffee beans' | 'g'
     }
 }

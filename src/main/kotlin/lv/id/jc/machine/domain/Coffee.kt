@@ -1,6 +1,6 @@
-package lv.id.jc.machine
+package lv.id.jc.machine.domain
 
-import lv.id.jc.machine.Ingredient.*
+import lv.id.jc.machine.domain.Ingredient.*
 
 enum class Coffee(val recipe: Map<Ingredient, Int>, val price: Int) {
     Espresso(mapOf(Water to 250, CoffeeBeans to 16), 4),

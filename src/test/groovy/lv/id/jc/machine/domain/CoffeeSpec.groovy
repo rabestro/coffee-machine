@@ -1,12 +1,9 @@
-package lv.id.jc.machine
+package lv.id.jc.machine.domain
 
-import spock.lang.Narrative
-import spock.lang.See
-import spock.lang.Specification
-import spock.lang.Subject
-import spock.lang.Title
 
-import static lv.id.jc.machine.Ingredient.*
+import spock.lang.*
+
+import static lv.id.jc.machine.domain.Ingredient.*
 
 @Title('Coffee drinks recipe and price')
 @Narrative('''
