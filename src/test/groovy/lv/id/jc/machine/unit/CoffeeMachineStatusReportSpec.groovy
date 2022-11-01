@@ -14,19 +14,19 @@ As a technician
 I want to checks remaining resources in coffee machine
 So that I know which resources need to be refilled
 ''')
-@Subject(ResourcesUnit)
-class ResourcesUnitStatusReportSpec extends Specification {
+@Subject(Engine)
+class CoffeeMachineStatusReportSpec extends Specification {
 
     def 'should return the volume of the remaining resources'() {
 
         given: 'newly created resource unit with initial values'
-        def resourcesUnit = new ResourcesUnit()
+        def machine = new Engine()
 
         expect: 'the initial volume of all resources is zero'
-        values().every { resourcesUnit.volume(it) == 0 }
+        values().every { machine.volume(it) == 0 }
 
         when: 'we add a certain amount of resources'
-        with(resourcesUnit) {
+        with(machine) {
             fill(Water, water)
             fill(Milk, milk)
             fill(CoffeeBeans, beans)
@@ -35,7 +35,7 @@ class ResourcesUnitStatusReportSpec extends Specification {
         }
 
         then: 'we get an accurate report on the amount of resources available'
-        resourcesUnit.status() == report
+        machine.status() == report
 
         where: 'the volume of resources'
         water | milk | beans | cups | money

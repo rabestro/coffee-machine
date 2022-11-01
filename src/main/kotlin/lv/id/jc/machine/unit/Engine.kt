@@ -1,8 +1,11 @@
 package lv.id.jc.machine.unit
 
 import lv.id.jc.machine.model.Resource
+import lv.id.jc.machine.state.State
 
-class ResourcesUnit {
+class Engine(val display: (String) -> Unit = ::println) {
+    var state: State = State.MainMenu
+
     private val containers = Resource.values().associateWith { Container(it, 0) }
 
     fun status() = Resource.values()

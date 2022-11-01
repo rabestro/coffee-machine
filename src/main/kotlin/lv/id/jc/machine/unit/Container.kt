@@ -2,18 +2,18 @@ package lv.id.jc.machine.unit
 
 import lv.id.jc.machine.model.Resource
 
-class Container(private val type: Resource, var volume: Int = 0) {
+class Container(private val resource: Resource, var volume: Int = 0) {
 
-    fun replenish(replenishment: Int) {
-        volume += replenishment
+    fun replenish(volume: Int) {
+        this.volume += volume
     }
 
-    fun hasResource(minimum: Int) = volume >= minimum
+    fun hasVolume(volume: Int) = this.volume >= volume
 
-    fun status() = type.status(volume)
+    fun status() = resource.status(volume)
 
-    fun take(resource: Int) {
-        volume -= resource
+    fun take(volume: Int) {
+        this.volume -= volume
     }
 
 }
