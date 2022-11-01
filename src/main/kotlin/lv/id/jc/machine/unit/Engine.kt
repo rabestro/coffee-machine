@@ -8,11 +8,7 @@ class Engine(val display: (String) -> Unit = ::println) {
 
     private val containers = Resource.values().associateWith { Container(it, 0) }
 
-    fun status() = Resource.values()
-        .joinToString("\n", "The coffee machine has:\n")
-        { containers[it]!!.status() }
-
-    fun volume(resource: Resource) = containers[resource]!!.volume
+    fun volume(resource: Resource) = containers[resource]?.volume ?: 0
 
     fun take(resource: Resource, volume: Int) {
         containers[resource]!!.take(volume)
@@ -21,4 +17,5 @@ class Engine(val display: (String) -> Unit = ::println) {
     fun fill(resource: Resource, volume: Int) {
         containers[resource]!!.replenish(volume)
     }
+
 }

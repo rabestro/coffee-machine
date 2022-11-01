@@ -14,8 +14,12 @@ class MainMenu(private val engine: Engine) : Command {
                 engine.take(Resource.Money, money)
                 engine.display("I gave you \$$money")
             }
-            "remaining" -> engine.display(engine.status())
+            "remaining" -> engine.display(status())
             "exit" -> engine.state = State.Exit
         }
     }
+
+    private fun status() = Resource.values()
+        .joinToString("\n", "The coffee machine has:\n")
+        { it.status(engine.volume(it)) }
 }

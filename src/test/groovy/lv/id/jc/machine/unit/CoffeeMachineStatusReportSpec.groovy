@@ -1,6 +1,6 @@
 package lv.id.jc.machine.unit
 
-
+import lv.id.jc.machine.state.MainMenu
 import spock.lang.Narrative
 import spock.lang.Specification
 import spock.lang.Subject
@@ -19,8 +19,9 @@ class CoffeeMachineStatusReportSpec extends Specification {
 
     def 'should return the volume of the remaining resources'() {
 
-        given: 'newly created resource unit with initial values'
+        given: 'coffee machine with initial values'
         def machine = new Engine()
+        def menu = new MainMenu(machine)
 
         expect: 'the initial volume of all resources is zero'
         values().every { machine.volume(it) == 0 }
@@ -35,7 +36,7 @@ class CoffeeMachineStatusReportSpec extends Specification {
         }
 
         then: 'we get an accurate report on the amount of resources available'
-        machine.status() == report
+        menu.status() == report
 
         where: 'the volume of resources'
         water | milk | beans | cups | money

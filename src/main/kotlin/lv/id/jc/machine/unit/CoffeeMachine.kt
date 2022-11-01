@@ -5,8 +5,8 @@ import lv.id.jc.machine.state.State
 
 class CoffeeMachine(
     private val engine: Engine,
-    private val commands: Map<State, Command>) {
-
+    private val commands: Map<State, Command>
+) {
     fun prompt() = engine.display(engine.state.prompt)
 
     fun process(request: String) {
