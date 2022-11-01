@@ -1,9 +1,9 @@
-package lv.id.jc.machine.domain
+package lv.id.jc.machine.model
 
 
 import spock.lang.*
 
-import static lv.id.jc.machine.domain.Ingredient.*
+import static lv.id.jc.machine.model.Resource.*
 
 @Title('Coffee drinks recipe and price')
 @Narrative('''
