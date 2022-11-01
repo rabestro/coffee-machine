@@ -11,7 +11,7 @@ stateDiagram-v2
     Buy: What do you want to buy?
     state Buy {
         state coffee <<choice>> 
-            coffee --> Espresso: 1
+            coffee --> (Espresso): 1
             coffee --> Latte : 2
             coffee --> Cappuccino: 3
             coffee --> [*]: back
