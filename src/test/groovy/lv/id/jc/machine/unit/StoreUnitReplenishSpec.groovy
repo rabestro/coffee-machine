@@ -8,9 +8,9 @@ import spock.lang.Title
 
 import static lv.id.jc.machine.model.Resource.*
 
-@Title('Technician replenishes the resources in the coffee machine')
+@Title('Control unit replenishes the resources in the storage unit')
 @Narrative('''
-As a technician
+As a control unit
 I want to replenish the necessary resources in the coffee machine
 So that the coffee machine can prepare the necessary coffee drinks
 ''')
@@ -39,6 +39,5 @@ class StoreUnitReplenishSpec extends Specification {
         water | milk | beans | cups | money | target | replenishment
         0     | 0    | 0     | 0    | 0     | Water  | 5000
         400   | 540  | 20    | 9    | 550   | Milk   | 2500
-
     }
 }

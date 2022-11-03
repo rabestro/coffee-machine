@@ -14,7 +14,7 @@ import static lv.id.jc.machine.model.Resource.*
 @Title('Technician checks remaining resources in coffee machine')
 @Narrative('''
 As a technician
-I want to checks remaining resources in coffee machine
+I want to check remaining resources in coffee machine
 So that I know which resources need to be refilled
 ''')
 class ControlUnitStatusReportSpec extends Specification {

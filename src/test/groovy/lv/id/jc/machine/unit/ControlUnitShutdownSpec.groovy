@@ -16,7 +16,7 @@ So that it stops working and I can do maintenance
 ''')
 class ControlUnitShutdownSpec extends Specification {
 
-    def 'should turn off the control unit of the coffee machine'() {
+    def 'should turn off the control unit'() {
 
         given: 'coffee machine control unit with dummy display and storage'
         @Subject def controlUnit = new ControlBlock(Stub(DisplayUnit), _ as StorageUnit)
