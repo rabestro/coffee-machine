@@ -14,14 +14,14 @@ As a technician
 I want to turns off the coffee machine
 So that it stops working and I can do maintenance
 ''')
-class CoffeeMachineShutdownSpec extends Specification {
+class ControlUnitShutdownSpec extends Specification {
 
     def 'should turn off the control unit of the coffee machine'() {
 
         given: 'coffee machine control unit with dummy display and storage'
         @Subject def controlUnit = new ControlBlock(Stub(DisplayUnit), _ as StorageUnit)
 
-        and: 'coffee machine control unit is in main menu mode'
+        and: 'control unit is in main menu state'
         controlUnit.switchTo(ControlState.MainMenu)
 
         expect: 'control unit works'

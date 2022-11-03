@@ -17,7 +17,7 @@ As a technician
 I want to checks remaining resources in coffee machine
 So that I know which resources need to be refilled
 ''')
-class CoffeeMachineStatusReportSpec extends Specification {
+class ControlUnitStatusReportSpec extends Specification {
 
     def 'should return the volume of the remaining resources'() {
 

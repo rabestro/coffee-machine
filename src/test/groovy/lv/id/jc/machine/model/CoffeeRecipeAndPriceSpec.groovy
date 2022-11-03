@@ -13,7 +13,7 @@ So that I will be able to enjoy the beverage
 ''')
 @Subject(Coffee)
 @See('https://hyperskill.org/projects/67/stages/364/implement')
-class CoffeeSpec extends Specification {
+class CoffeeRecipeAndPriceSpec extends Specification {
 
     def 'should have the correct recipe and price for #coffee'() {
 

@@ -1,23 +1,28 @@
 package lv.id.jc.machine.model
 
-
+import spock.lang.Narrative
 import spock.lang.Specification
 import spock.lang.Subject
 import spock.lang.Title
 
 @Subject(Resource)
 @Title('Resources for coffee drinks')
-class ResourceSpec extends Specification {
+@Narrative('''
+As a Coffee Machine
+I need required resources
+So that I can operate and provide testy coffee drinks
+''')
+class CoffeeMachineResourcesSpec extends Specification {
 
     def 'should have the all necessary resources'() {
 
         given: 'the set of all resource names'
-        def names = Resource.values()*.resourceName as Set
+        def availableResources = Resource.values()*.resourceName as Set
 
         expect: 'the required resource is present in the set of names'
-        resource in names
+        requiredResource in availableResources
 
         where: 'a list of resources required for the coffee machine'
-        resource << ['water', 'milk', 'coffee beans', 'disposable cups', 'money']
+        requiredResource << ['water', 'milk', 'coffee beans', 'disposable cups', 'money']
     }
 }
