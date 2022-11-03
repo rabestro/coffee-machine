@@ -1,12 +1,9 @@
 package lv.id.jc.machine
 
 import lv.id.jc.machine.unit.ControlUnit
+import lv.id.jc.machine.unit.DisplayUnit
+import lv.id.jc.machine.unit.InputUnit
 import lv.id.jc.machine.unit.StorageUnit
-import java.util.function.Consumer
-import java.util.function.Supplier
-
-typealias InputUnit = Supplier<String>
-typealias DisplayUnit = Consumer<String>
 
 class CoffeeMachine(
     private val inputUnit: InputUnit,

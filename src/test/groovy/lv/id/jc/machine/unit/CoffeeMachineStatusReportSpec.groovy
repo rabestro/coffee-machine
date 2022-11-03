@@ -1,12 +1,11 @@
 package lv.id.jc.machine.unit
 
+import lv.id.jc.machine.model.Command
 import lv.id.jc.machine.model.ControlState
 import spock.lang.Narrative
 import spock.lang.Specification
 import spock.lang.Subject
 import spock.lang.Title
-
-import java.util.function.Consumer
 
 import static lv.id.jc.machine.model.Resource.*
 
@@ -33,7 +32,7 @@ class CoffeeMachineStatusReportSpec extends Specification {
         }
 
         and: 'dummy display implementation'
-        def fakeDisplay = new Consumer<String>() {
+        def fakeDisplay = new DisplayUnit() {
             def text = ""
 
             @Override
@@ -52,7 +51,7 @@ class CoffeeMachineStatusReportSpec extends Specification {
         fakeDisplay.text = ""
 
         when: 'we request the current state on the resources of the coffee machine'
-        controlBlock.process("remaining")
+        controlBlock.process(Command.REMAINING.name())
 
         then: 'we get on the display detailed information about the state of the resources'
         fakeDisplay.text == report
