@@ -14,7 +14,7 @@ As a technician
 I want to turns off the coffee machine
 So that it stops working and I can do maintenance
 ''')
-class CoffeeMachineShutdownSpec extends Specification {
+class ControlUnitShutdownSpec extends Specification {
 
     def 'should turn off the control unit of the coffee machine'() {
 
