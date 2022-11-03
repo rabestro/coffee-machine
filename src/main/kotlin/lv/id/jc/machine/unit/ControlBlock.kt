@@ -1,6 +1,6 @@
 package lv.id.jc.machine.unit
 
-import lv.id.jc.machine.DisplayUnit
+import lv.id.jc.machine.model.Command
 import lv.id.jc.machine.model.ControlState
 import lv.id.jc.machine.model.ControlState.*
 import lv.id.jc.machine.model.Resource
@@ -28,12 +28,12 @@ class ControlBlock(
     }
 
     private fun mainMenu(request: String) {
-        when (request) {
-            "buy" -> switchTo(BuyCoffee)
-            "fill" -> switchTo(FillWater)
-            "take" -> withdrawCash()
-            "remaining" -> storageState()
-            "exit" -> switchTo(Shutdown)
+        when (Command.valueOf(request.uppercase())) {
+            Command.BUY -> switchTo(BuyCoffee)
+            Command.FILL -> switchTo(FillWater)
+            Command.TAKE -> withdrawCash()
+            Command.REMAINING -> storageState()
+            Command.EXIT -> switchTo(Shutdown)
         }
     }
 
