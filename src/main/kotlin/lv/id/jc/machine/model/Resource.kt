@@ -5,5 +5,5 @@ enum class Resource(val resourceName: String, val status: (Int) -> String) {
     Milk("milk", { "$it ml of milk" }),
     CoffeeBeans("coffee beans", { "$it g of coffee beans" }),
     DisposableCups("disposable cups", { "$it disposable cups" }),
-    Money("money", { "$$it of money" })
+    Cash("money", { "$$it of money" })
 }

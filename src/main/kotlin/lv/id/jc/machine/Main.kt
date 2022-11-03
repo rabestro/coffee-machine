@@ -1,37 +1,25 @@
 package lv.id.jc.machine
 
 import lv.id.jc.machine.model.Resource
-import lv.id.jc.machine.state.*
-import lv.id.jc.machine.unit.CoffeeMachine
-import lv.id.jc.machine.unit.Engine
+import lv.id.jc.machine.unit.ControlBlock
+import lv.id.jc.machine.unit.StorageBlock
 
 fun main() {
-    val machine = createCoffeeMachine()
 
-    while (machine.isOperate()) {
-        machine.prompt()
-        machine.process(readln())
-    }
-}
+    val storage = StorageBlock()
 
-fun createCoffeeMachine(): CoffeeMachine {
-    val engine = Engine()
-
-    with(engine) {
+    with(storage) {
         fill(Resource.Water, 400)
         fill(Resource.Milk, 540)
         fill(Resource.CoffeeBeans, 120)
         fill(Resource.DisposableCups, 9)
-        fill(Resource.Money, 550)
+        fill(Resource.Cash, 550)
     }
 
-    val states = mapOf(
-        State.MainMenu to MainMenu(engine),
-        State.FillWater to FillResource(engine, Resource.Water, State.FillMilk),
-        State.FillMilk to FillResource(engine, Resource.Milk, State.FillBeans),
-        State.FillBeans to FillResource(engine, Resource.CoffeeBeans, State.FillCups),
-        State.FillCups to FillResource(engine, Resource.DisposableCups, State.MainMenu)
-    )
+    val controlUnit = ControlBlock(::println, storage)
 
-    return CoffeeMachine(engine, states)
+    val coffeeMachine = CoffeeMachine(::readln, ::println, storage, controlUnit)
+
+
 }
+

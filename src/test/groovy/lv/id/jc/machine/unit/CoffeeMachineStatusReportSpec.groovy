@@ -1,10 +1,12 @@
 package lv.id.jc.machine.unit
 
-import lv.id.jc.machine.state.MainMenu
+import lv.id.jc.machine.model.ControlState
 import spock.lang.Narrative
 import spock.lang.Specification
 import spock.lang.Subject
 import spock.lang.Title
+
+import java.util.function.Consumer
 
 import static lv.id.jc.machine.model.Resource.*
 
@@ -14,31 +16,48 @@ As a technician
 I want to checks remaining resources in coffee machine
 So that I know which resources need to be refilled
 ''')
-@Subject(Engine)
 class CoffeeMachineStatusReportSpec extends Specification {
 
     def 'should return the volume of the remaining resources'() {
 
-        given: 'coffee machine with initial values'
-        def machine = new Engine()
-        def menu = new MainMenu(machine)
+        given: 'storage block for a coffee machine'
+        def storageBlock = new StorageBlock()
 
-        expect: 'the initial volume of all resources is zero'
-        values().every { machine.volume(it) == 0 }
-
-        when: 'we add a certain amount of resources'
-        with(machine) {
+        and: 'the storage is filled with a certain amount of resources'
+        with(storageBlock) {
             fill(Water, water)
             fill(Milk, milk)
             fill(CoffeeBeans, beans)
             fill(DisposableCups, cups)
-            fill(Money, money)
+            fill(Cash, money)
         }
 
-        then: 'we get an accurate report on the amount of resources available'
-        menu.status() == report
+        and: 'dummy display implementation'
+        def fakeDisplay = new Consumer<String>() {
+            def text = ""
 
-        where: 'the volume of resources'
+            @Override
+            void accept(String output) {
+                text += output
+            }
+        }
+
+        and: 'a control device having a fake display and managing a resource block'
+        @Subject def controlBlock = new ControlBlock(fakeDisplay, storageBlock)
+
+        and: 'we switch the control unit to main menu mode'
+        controlBlock.switchTo(ControlState.MainMenu)
+
+        and: 'we clean the fake display'
+        fakeDisplay.text = ""
+
+        when: 'we request the current state on the resources of the coffee machine'
+        controlBlock.process("remaining")
+
+        then: 'we get on the display detailed information about the state of the resources'
+        fakeDisplay.text == report
+
+        where: 'the volume of resources in the storage unit'
         water | milk | beans | cups | money
         0     | 0    | 0     | 0    | 0
         400   | 540  | 20    | 9    | 550
