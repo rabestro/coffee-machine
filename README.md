@@ -8,7 +8,7 @@ Implementation of the [educational project](https://hyperskill.org/projects/67?t
 - [Gradle Test Report](https://rabestro.github.io/coffee-machine/test)
 - [Code coverage](https://rabestro.github.io/coffee-machine/jacocoHtml)
 
-## State diagram
+## Coffee Machine control state diagram
 
 ```mermaid
 stateDiagram-v2
@@ -61,3 +61,30 @@ stateDiagram-v2
     Menu --> Take: take
     Menu --> [*] : exit
 ```
+
+## Resources replenishment Sequence diagram
+
+```mermaid
+sequenceDiagram
+    actor Technician
+    participant Control Unit
+    link Control Unit: source code @ https://github.com/rabestro/coffee-machine/blob/main/src/main/kotlin/lv/id/jc/machine/unit/impl/ControlBlock.kt
+    participant Storage Unit
+    link Storage Unit: source code @ https://github.com/rabestro/coffee-machine/blob/main/src/main/kotlin/lv/id/jc/machine/unit/StorageUnit.kt
+    Control Unit-->>Technician: Write action
+    Technician->>+Control Unit: fill
+    Control Unit-->>-Technician: How many ml of water?
+    Technician->>+Control Unit: 5000
+    Control Unit->>+Storage Unit: fill Water, 5000
+    Control Unit-->>-Technician: How many ml of milk?
+    Technician->>+Control Unit: 3000
+    Control Unit->>+Storage Unit: fill Milk, 3000
+    Control Unit-->>-Technician: How many grams of coffee beans?
+    Technician->>+Control Unit: 1275
+    Control Unit->>+Storage Unit: fill CoffeeBeans, 1275
+    Control Unit-->>-Technician: How many disposable cups?
+    Technician->>+Control Unit: 28
+    Control Unit->>+Storage Unit: fill DisposableCaps, 28
+    Control Unit-->>Technician: Write action
+```
+
