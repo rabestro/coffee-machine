@@ -10,8 +10,6 @@ class Container(private val resource: Resource, var volume: Int = 0) {
 
     fun hasVolume(volume: Int) = this.volume >= volume
 
-    fun status() = resource.status(volume)
-
     fun take(volume: Int) {
         this.volume -= volume
     }
