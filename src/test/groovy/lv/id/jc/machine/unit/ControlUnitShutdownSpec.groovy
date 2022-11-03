@@ -21,7 +21,7 @@ class ControlUnitShutdownSpec extends Specification {
         given: 'coffee machine control unit with dummy display and storage'
         @Subject def controlUnit = new ControlBlock(Stub(DisplayUnit), _ as StorageUnit)
 
-        and: 'coffee machine control unit is in main menu mode'
+        and: 'control unit is in main menu state'
         controlUnit.switchTo(ControlState.MainMenu)
 
         expect: 'control unit works'
