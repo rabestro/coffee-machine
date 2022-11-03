@@ -1,25 +1,32 @@
 package lv.id.jc.machine
 
 import lv.id.jc.machine.model.Resource
-import lv.id.jc.machine.unit.ControlBlock
-import lv.id.jc.machine.unit.StorageBlock
+import lv.id.jc.machine.unit.impl.ControlBlock
+import lv.id.jc.machine.unit.DisplayUnit
+import lv.id.jc.machine.unit.InputUnit
+import lv.id.jc.machine.unit.impl.StorageBlock
 
 fun main() {
 
-    val storage = StorageBlock()
-
-    with(storage) {
+    val storageUnit = StorageBlock()
+    with(storageUnit) {
         fill(Resource.Water, 400)
         fill(Resource.Milk, 540)
         fill(Resource.CoffeeBeans, 120)
         fill(Resource.DisposableCups, 9)
         fill(Resource.Cash, 550)
     }
+    val inputUnit = InputUnit { readln() }
+    val displayUnit = DisplayUnit { text -> println(text) }
+    val controlUnit = ControlBlock(displayUnit, storageUnit)
 
-    val controlUnit = ControlBlock(::println, storage)
+    val coffeeMachine = CoffeeMachine(inputUnit, controlUnit)
 
-    val coffeeMachine = CoffeeMachine(::readln, ::println, storage, controlUnit)
+    coffeeMachine.powerOn()
 
+    while (coffeeMachine.isOperate()) {
+        coffeeMachine.processRequest()
+    }
 
 }
 

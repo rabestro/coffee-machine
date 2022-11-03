@@ -1,6 +1,6 @@
 package lv.id.jc.machine.unit
 
-
+import lv.id.jc.machine.unit.impl.StorageBlock
 import spock.lang.Narrative
 import spock.lang.Specification
 import spock.lang.Subject
@@ -14,13 +14,12 @@ As a technician
 I want to replenish the necessary resources in the coffee machine
 So that the coffee machine can prepare the necessary coffee drinks
 ''')
-@Subject(StorageBlock)
 class CoffeeMachineReplenishSpec extends Specification {
 
     def 'should replenish the specified resource in the coffee machine'() {
 
         given: 'resource unit with a particular initial volume of resources'
-        def storage = new StorageBlock()
+        @Subject def storage = new StorageBlock()
 
         with(storage) {
             fill(Water, water)
