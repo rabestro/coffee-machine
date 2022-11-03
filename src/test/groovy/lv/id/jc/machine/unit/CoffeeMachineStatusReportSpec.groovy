@@ -2,6 +2,8 @@ package lv.id.jc.machine.unit
 
 import lv.id.jc.machine.model.Command
 import lv.id.jc.machine.model.ControlState
+import lv.id.jc.machine.unit.impl.ControlBlock
+import lv.id.jc.machine.unit.impl.StorageBlock
 import spock.lang.Narrative
 import spock.lang.Specification
 import spock.lang.Subject

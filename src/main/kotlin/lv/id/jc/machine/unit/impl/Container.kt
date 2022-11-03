@@ -1,4 +1,4 @@
-package lv.id.jc.machine.unit
+package lv.id.jc.machine.unit.impl
 
 import lv.id.jc.machine.model.Resource
 

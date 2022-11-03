@@ -1,10 +1,10 @@
 package lv.id.jc.machine
 
 import lv.id.jc.machine.model.Resource
-import lv.id.jc.machine.unit.ControlBlock
+import lv.id.jc.machine.unit.impl.ControlBlock
 import lv.id.jc.machine.unit.DisplayUnit
 import lv.id.jc.machine.unit.InputUnit
-import lv.id.jc.machine.unit.StorageBlock
+import lv.id.jc.machine.unit.impl.StorageBlock
 
 fun main() {
 
@@ -20,7 +20,7 @@ fun main() {
     val displayUnit = DisplayUnit { text -> println(text) }
     val controlUnit = ControlBlock(displayUnit, storageUnit)
 
-    val coffeeMachine = CoffeeMachine(inputUnit, displayUnit, storageUnit, controlUnit)
+    val coffeeMachine = CoffeeMachine(inputUnit, controlUnit)
 
     coffeeMachine.powerOn()
 

@@ -1,6 +1,7 @@
-package lv.id.jc.machine.unit
+package lv.id.jc.machine.unit.impl
 
 import lv.id.jc.machine.model.Resource
+import lv.id.jc.machine.unit.StorageUnit
 
 class StorageBlock() : StorageUnit {
     private val containers = Resource.values().associateWith { Container(it, 0) }

@@ -1,9 +1,12 @@
-package lv.id.jc.machine.unit
+package lv.id.jc.machine.unit.impl
 
 import lv.id.jc.machine.model.Command
 import lv.id.jc.machine.model.ControlState
 import lv.id.jc.machine.model.ControlState.*
 import lv.id.jc.machine.model.Resource
+import lv.id.jc.machine.unit.ControlUnit
+import lv.id.jc.machine.unit.DisplayUnit
+import lv.id.jc.machine.unit.StorageUnit
 
 class ControlBlock(
     private val display: DisplayUnit,
@@ -18,6 +21,7 @@ class ControlBlock(
             FillMilk -> { volume -> fill(Resource.Milk, volume, FillBeans) }
             FillBeans -> { volume -> fill(Resource.CoffeeBeans, volume, FillCups) }
             FillCups -> { volume -> fill(Resource.CoffeeBeans, volume, MainMenu) }
+            Shutdown -> { _ -> }
             else -> ::mainMenu
         }(request)
     }
@@ -26,6 +30,8 @@ class ControlBlock(
         controlState = state
         display.accept(state.prompt)
     }
+
+    override fun isOperate(): Boolean = controlState != Shutdown
 
     private fun mainMenu(request: String) {
         when (Command.valueOf(request.uppercase())) {
