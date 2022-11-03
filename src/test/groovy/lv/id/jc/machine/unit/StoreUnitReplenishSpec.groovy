@@ -16,7 +16,7 @@ So that the coffee machine can prepare the necessary coffee drinks
 ''')
 class StoreUnitReplenishSpec extends Specification {
 
-    def 'should replenish the specified resource in the coffee machine'() {
+    def 'should replenish the specified resource'() {
 
         given: 'resource unit with a particular initial volume of resources'
         @Subject def storage = new StorageBlock()
