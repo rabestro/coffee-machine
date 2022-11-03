@@ -22,10 +22,10 @@ class ControlUnitStatusReportSpec extends Specification {
     def 'should return the volume of the remaining resources'() {
 
         given: 'storage block for a coffee machine'
-        def storageBlock = new StorageBlock()
+        def storageUnit = new StorageBlock()
 
         and: 'the storage is filled with a certain amount of resources'
-        with(storageBlock) {
+        with(storageUnit) {
             fill(Water, water)
             fill(Milk, milk)
             fill(CoffeeBeans, beans)
@@ -43,8 +43,8 @@ class ControlUnitStatusReportSpec extends Specification {
             }
         }
 
-        and: 'a control device having a fake display and managing a resource block'
-        @Subject def controlBlock = new ControlBlock(fakeDisplay, storageBlock)
+        and: 'a control device manging a storage unit and having a fake display'
+        @Subject def controlBlock = new ControlBlock(fakeDisplay, storageUnit)
 
         and: 'we switch the control unit to main menu mode'
         controlBlock.switchTo(ControlState.MainMenu)
@@ -53,7 +53,7 @@ class ControlUnitStatusReportSpec extends Specification {
         fakeDisplay.text = ""
 
         when: 'we request the current state on the resources of the coffee machine'
-        controlBlock.process(Command.REMAINING.name())
+        controlBlock.process Command.REMAINING.name()
 
         then: 'we get on the display detailed information about the state of the resources'
         fakeDisplay.text == report
