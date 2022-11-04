@@ -7,8 +7,21 @@ import lv.id.jc.machine.unit.InputUnit
 import lv.id.jc.machine.unit.impl.StorageBlock
 
 fun main() {
+    val coffeeMachine = filledCoffeeMachine()
+
+    coffeeMachine.powerOn()
+
+    while (coffeeMachine.isOperate()) {
+        coffeeMachine.processRequest()
+    }
+}
+
+fun filledCoffeeMachine(): CoffeeMachine {
+    val inputUnit = InputUnit { readln() }
+    val displayUnit = DisplayUnit { text -> println(text) }
 
     val storageUnit = StorageBlock()
+
     with(storageUnit) {
         fill(Resource.Water, 400)
         fill(Resource.Milk, 540)
@@ -16,17 +29,8 @@ fun main() {
         fill(Resource.DisposableCups, 9)
         fill(Resource.Cash, 550)
     }
-    val inputUnit = InputUnit { readln() }
-    val displayUnit = DisplayUnit { text -> println(text) }
+
     val controlUnit = ControlBlock(displayUnit, storageUnit)
 
-    val coffeeMachine = CoffeeMachine(inputUnit, controlUnit)
-
-    coffeeMachine.powerOn()
-
-    while (coffeeMachine.isOperate()) {
-        coffeeMachine.processRequest()
-    }
-
+    return CoffeeMachine(inputUnit, controlUnit)
 }
-
