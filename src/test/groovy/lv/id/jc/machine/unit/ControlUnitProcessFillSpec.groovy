@@ -8,29 +8,29 @@ import spock.lang.Specification
 import spock.lang.Subject
 import spock.lang.Title
 
-@Title('Technician executes the "fill" command')
+@Title('Coffee machine send the "fill" command')
 @Narrative('''
-As a technician
-I want to execute the "fill" command in main menu 
-So that I will able to replenish the necessary resources in the coffee machine
+As a coffee machine
+I want the control block to process the "Fill" command
+So that I will able to replenish the necessary resources in the storage unit
 ''')
-class ControlUnitFillSpec extends Specification {
+class ControlUnitProcessFillSpec extends Specification {
 
     def 'should process the request for filling resources'() {
 
-        given: 'mocked display unit for the coffee machine'
+        given: 'mock of display unit for the coffee machine'
         def displayUnit = Mock DisplayUnit
 
-        and: 'control unit with mocked display and dummy storage'
+        and: 'control unit with mock display and dummy storage'
         @Subject def controlUnit = new ControlBlock(displayUnit, _ as StorageUnit)
 
-        and: 'control unit is in main menu state'
+        and: 'control unit is in the main menu state'
         controlUnit.switchTo ControlState.MainMenu
 
-        when: 'we sends a request for replenishment of resources'
+        when: 'coffee machine sends a request to control unit'
         controlUnit.process Command.FILL.name()
 
-        then: 'coffee machine prompts you to enter the amount of water'
+        then: 'the display prompts you to enter the volume of water'
         1 * displayUnit.accept({ it == ControlState.FillWater.prompt })
     }
 }

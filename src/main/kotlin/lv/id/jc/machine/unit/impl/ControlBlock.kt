@@ -20,7 +20,7 @@ class ControlBlock(
             FillWater -> { volume -> fill(Resource.Water, volume, FillMilk) }
             FillMilk -> { volume -> fill(Resource.Milk, volume, FillBeans) }
             FillBeans -> { volume -> fill(Resource.CoffeeBeans, volume, FillCups) }
-            FillCups -> { volume -> fill(Resource.CoffeeBeans, volume, MainMenu) }
+            FillCups -> { volume -> fill(Resource.DisposableCups, volume, MainMenu) }
             Shutdown -> { _ -> }
             else -> ::mainMenu
         }(request)
