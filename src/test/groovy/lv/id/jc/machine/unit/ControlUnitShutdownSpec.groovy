@@ -8,32 +8,33 @@ import spock.lang.Specification
 import spock.lang.Subject
 import spock.lang.Title
 
-@Title('Technician turns off the coffee machine')
+@Title('The coffee machine switches off the control unit')
 @Narrative('''
-As a technician
-I want to turns off the coffee machine
-So that it stops working and I can do maintenance
+As a coffee machine
+I want to turns off the control unit
+So that it stops working and the coffee machine turns off
 ''')
 class ControlUnitShutdownSpec extends Specification {
 
     def 'should turn off the control unit'() {
 
-        given: 'coffee machine control unit with dummy display and storage'
-        @Subject def controlUnit = new ControlBlock(Stub(DisplayUnit), _ as StorageUnit)
+        given: 'the control unit with dummy display and storage'
+        def displayUnit = Stub DisplayUnit
+        @Subject def controlUnit = new ControlBlock(displayUnit, _ as StorageUnit)
 
-        and: 'control unit is in main menu state'
+        and: 'the control unit is in main menu state'
         controlUnit.switchTo(ControlState.MainMenu)
 
-        expect: 'control unit works'
+        expect: 'the control unit works'
         controlUnit.isOperate()
 
-        when: 'the technician sends a command to turn off the machine'
+        when: 'the coffee machine sends a request'
         controlUnit.process request
 
-        then: 'the control unit switches off and the coffee machine no longer works'
+        then: 'the control unit is no more operate'
         !controlUnit.isOperate()
 
-        where: 'command to turn off the coffee machine'
+        where: 'request to turn off the coffee machine'
         request = Command.EXIT.name()
     }
 }

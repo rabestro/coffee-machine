@@ -8,16 +8,18 @@ import lv.id.jc.machine.unit.InputUnit
 import lv.id.jc.machine.unit.StorageUnit
 import lv.id.jc.machine.unit.impl.ControlBlock
 import spock.lang.Narrative
+import spock.lang.See
 import spock.lang.Specification
 import spock.lang.Subject
 import spock.lang.Title
 
-@Title('Technician executes the "fill" command')
+@Title('The technician executes the "fill" command')
 @Narrative('''
 As a technician
 I want to execute the "fill" command in main menu 
 So that I will able to replenish the necessary resources in the coffee machine
 ''')
+@See('https://github.com/rabestro/coffee-machine/wiki/Resources-replenishment')
 class CoffeeMachineReplenishSpec extends Specification {
 
     def 'should replenish the coffee machine storage unit'() {
