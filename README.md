@@ -66,25 +66,27 @@ stateDiagram-v2
 
 ```mermaid
 sequenceDiagram
-    actor Technician
-    participant Control Unit
-    link Control Unit: source code @ https://github.com/rabestro/coffee-machine/blob/main/src/main/kotlin/lv/id/jc/machine/unit/impl/ControlBlock.kt
-    participant Storage Unit
-    link Storage Unit: source code @ https://github.com/rabestro/coffee-machine/blob/main/src/main/kotlin/lv/id/jc/machine/unit/StorageUnit.kt
-    Control Unit-->>Technician: Write action
-    Technician->>+Control Unit: fill
-    Control Unit-->>-Technician: How many ml of water?
-    Technician->>+Control Unit: 5000
-    Control Unit->>+Storage Unit: fill Water, 5000
-    Control Unit-->>-Technician: How many ml of milk?
-    Technician->>+Control Unit: 3000
-    Control Unit->>+Storage Unit: fill Milk, 3000
-    Control Unit-->>-Technician: How many grams of coffee beans?
-    Technician->>+Control Unit: 1275
-    Control Unit->>+Storage Unit: fill CoffeeBeans, 1275
-    Control Unit-->>-Technician: How many disposable cups?
-    Technician->>+Control Unit: 28
-    Control Unit->>+Storage Unit: fill DisposableCaps, 28
-    Control Unit-->>Technician: Write action
+    participant CoffeeMachine
+    participant ControlUnit
+    link ControlUnit: source code @ https://github.com/rabestro/coffee-machine/blob/main/src/main/kotlin/lv/id/jc/machine/unit/impl/ControlBlock.kt
+    
+    participant StorageUnit
+    link StorageUnit: source code @ https://github.com/rabestro/coffee-machine/blob/main/src/main/kotlin/lv/id/jc/machine/unit/StorageUnit.kt
+    
+    ControlUnit-->>CoffeeMachine: Write action
+    CoffeeMachine->>+ControlUnit: process "fill"
+    ControlUnit-->>-CoffeeMachine: How many ml of water?
+    CoffeeMachine->>+ControlUnit: process 5000
+    ControlUnit->>+StorageUnit: fill Water, 5000
+    ControlUnit-->>-CoffeeMachine: How many ml of milk?
+    CoffeeMachine->>+ControlUnit: process 3000
+    ControlUnit->>+StorageUnit: fill Milk, 3000
+    ControlUnit-->>-CoffeeMachine: How many grams of coffee beans?
+    CoffeeMachine->>+ControlUnit: process 1275
+    ControlUnit->>+StorageUnit: fill CoffeeBeans, 1275
+    ControlUnit-->>-CoffeeMachine: How many disposable cups?
+    CoffeeMachine->>+ControlUnit: process 28
+    ControlUnit->>+StorageUnit: fill DisposableCaps, 28
+    ControlUnit-->>CoffeeMachine: Write action
 ```
 
