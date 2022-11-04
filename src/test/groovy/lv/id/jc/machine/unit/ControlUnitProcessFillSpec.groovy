@@ -8,10 +8,10 @@ import spock.lang.Specification
 import spock.lang.Subject
 import spock.lang.Title
 
-@Title('Coffee machine send the "fill" command')
+@Title('The coffee machine send the "fill" command')
 @Narrative('''
 As a coffee machine
-I want the control block to process the "Fill" command
+I want the control block to process the "fill" command
 So that I will able to replenish the necessary resources in the storage unit
 ''')
 class ControlUnitProcessFillSpec extends Specification {

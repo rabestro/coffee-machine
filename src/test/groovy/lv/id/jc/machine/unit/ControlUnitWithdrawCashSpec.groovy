@@ -11,7 +11,7 @@ import spock.lang.Title
 
 import static lv.id.jc.machine.model.Resource.*
 
-@Title('Collector withdraws cash for sold coffee drinks')
+@Title('The collector withdraws cash for sold coffee drinks')
 @Narrative('''
 As a collector
 I want to withdraws cash for sold coffee drinks

@@ -3,6 +3,7 @@ package lv.id.jc.machine.unit
 import lv.id.jc.machine.model.Command
 import lv.id.jc.machine.model.ControlState
 import lv.id.jc.machine.unit.impl.ControlBlock
+import lv.id.jc.machine.unit.impl.FakeDisplay
 import lv.id.jc.machine.unit.impl.StorageBlock
 import spock.lang.Narrative
 import spock.lang.Specification
@@ -11,11 +12,11 @@ import spock.lang.Title
 
 import static lv.id.jc.machine.model.Resource.*
 
-@Title('Technician checks remaining resources in coffee machine')
+@Title('The coffee machine asks control unit for status of resources')
 @Narrative('''
-As a technician
-I want to check remaining resources in coffee machine
-So that I know which resources need to be refilled
+As a coffee machine
+I want to check remaining resources in storage unit
+So that a technician know which resources need to be refilled
 ''')
 class ControlUnitStatusReportSpec extends Specification {
 
@@ -33,24 +34,13 @@ class ControlUnitStatusReportSpec extends Specification {
             fill(Cash, money)
         }
 
-        and: 'dummy display implementation'
-        def fakeDisplay = new DisplayUnit() {
-            def text = ""
-
-            @Override
-            void accept(String output) {
-                text += output
-            }
-        }
-
         and: 'a control device manging a storage unit and having a fake display'
+        def fakeDisplay = new FakeDisplay()
         @Subject def controlBlock = new ControlBlock(fakeDisplay, storageUnit)
 
-        and: 'we switch the control unit to main menu mode'
+        and: 'we switch to main menu mode ans clear the display'
         controlBlock.switchTo(ControlState.MainMenu)
-
-        and: 'we clean the fake display'
-        fakeDisplay.text = ""
+        fakeDisplay.clear()
 
         when: 'we request the current state on the resources of the coffee machine'
         controlBlock.process Command.REMAINING.name()
