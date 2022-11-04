@@ -87,3 +87,4 @@ sequenceDiagram
     Control Unit->>+Storage Unit: fill DisposableCaps, 28
     Control Unit-->>Technician: Write action
 ```
+
