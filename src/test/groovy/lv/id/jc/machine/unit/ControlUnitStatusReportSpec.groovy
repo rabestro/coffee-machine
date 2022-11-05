@@ -34,16 +34,16 @@ class ControlUnitStatusReportSpec extends Specification {
             fill(Cash, money)
         }
 
-        and: 'a control device manging a storage unit and having a fake display'
+        and: 'a control unit manging the storage and having a fake display'
         def fakeDisplay = new FakeDisplay()
-        @Subject def controlBlock = new ControlBlock(fakeDisplay, storageUnit)
+        @Subject def controlUnit = new ControlBlock(fakeDisplay, storageUnit)
 
-        and: 'we switch to main menu mode ans clear the display'
-        controlBlock.switchTo(ControlState.MainMenu)
+        and: 'we switch to main menu mode and clear the display'
+        controlUnit.switchTo(ControlState.MainMenu)
         fakeDisplay.clear()
 
         when: 'we request the current state on the resources of the coffee machine'
-        controlBlock.process Command.REMAINING.name()
+        controlUnit.process Command.REMAINING.name()
 
         then: 'we get on the display detailed information about the state of the resources'
         fakeDisplay.content() == report

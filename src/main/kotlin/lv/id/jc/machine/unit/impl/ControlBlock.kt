@@ -1,5 +1,6 @@
 package lv.id.jc.machine.unit.impl
 
+import lv.id.jc.machine.model.Coffee
 import lv.id.jc.machine.model.Command
 import lv.id.jc.machine.model.ControlState
 import lv.id.jc.machine.model.ControlState.*
@@ -7,6 +8,7 @@ import lv.id.jc.machine.model.Resource
 import lv.id.jc.machine.unit.ControlUnit
 import lv.id.jc.machine.unit.DisplayUnit
 import lv.id.jc.machine.unit.StorageUnit
+import java.lang.IllegalArgumentException
 
 class ControlBlock(
     private val display: DisplayUnit,
@@ -46,9 +48,21 @@ class ControlBlock(
 
     private fun buyCoffee(request: String) {
         when (request.uppercase()) {
-            Command.BACK.name -> switchTo(MainMenu)
-            else -> {}
+            Coffee.Espresso.number() -> make(Coffee.Espresso)
+            Coffee.Latte.number() -> make(Coffee.Latte)
+            Coffee.Cappuccino.number() -> make(Coffee.Cappuccino)
         }
+        switchTo(MainMenu)
+    }
+
+    private fun make(beverage: Coffee) {
+        val message = try {
+            storage.allocateResources(beverage)
+            "I have enough resources, making you a coffee!"
+        } catch (exception: IllegalArgumentException) {
+            exception.message ?: "Sorry, not enough resources!"
+        }
+        display.accept(message)
     }
 
     private fun withdrawCash() {

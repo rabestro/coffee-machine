@@ -32,7 +32,7 @@ class StorageUnitMissingResourcesSpec extends Specification {
         def actual = storageUnit.missingResources(drink)
 
         then: 'we get a set containing the missing ingredients'
-        actual == missingResources as Set
+        actual == missingResources
 
         where: 'resources in storage device, coffee drink and missing ingredients'
         water | milk | beans | cups | drink             | missingResources

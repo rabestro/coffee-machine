@@ -9,20 +9,15 @@ class StorageBlock : StorageUnit {
 
     override fun volume(resource: Resource) = containers[resource.ordinal]
 
-    override fun missingResources(beverage: Coffee): Set<Resource> {
-        val requiredResources = beverage.recipe + Pair(Resource.DisposableCups, 1)
-
-        return requiredResources
-            .filter { notEnough(it.key, it.value) }
-            .map { it.key }
-            .toSet()
-    }
-
     override fun allocateResources(beverage: Coffee) {
+        val missingResources = missingResources(beverage)
+        require(missingResources.isEmpty()) { "Sorry, not enough resources: $missingResources!" }
+
         beverage.recipe.forEach {
             containers[it.key.ordinal] -= it.value
         }
         containers[Resource.DisposableCups.ordinal]--
+        containers[Resource.Cash.ordinal] += beverage.price
     }
 
     override fun withdrawCash() {
@@ -31,6 +26,13 @@ class StorageBlock : StorageUnit {
 
     override fun fill(resource: Resource, volume: Int) {
         containers[resource.ordinal] += volume
+    }
+
+    private fun missingResources(beverage: Coffee): List<Resource> {
+        val requiredResources = beverage.recipe + Pair(Resource.DisposableCups, 1)
+        return requiredResources
+            .filter { notEnough(it.key, it.value) }
+            .map { it.key }
     }
 
     private fun notEnough(resource: Resource, volume: Int) = containers[resource.ordinal] < volume
