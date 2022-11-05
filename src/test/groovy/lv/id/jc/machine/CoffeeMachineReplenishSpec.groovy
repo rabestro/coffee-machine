@@ -5,19 +5,15 @@ import lv.id.jc.machine.model.ControlState
 import lv.id.jc.machine.model.Resource
 import lv.id.jc.machine.unit.DisplayUnit
 import lv.id.jc.machine.unit.InputUnit
-import lv.id.jc.machine.unit.StorageUnit
 import lv.id.jc.machine.unit.impl.ControlBlock
-import spock.lang.Narrative
-import spock.lang.See
-import spock.lang.Specification
-import spock.lang.Subject
-import spock.lang.Title
+import lv.id.jc.machine.unit.impl.StorageBlock
+import spock.lang.*
 
-@Title('The technician executes the "fill" command')
+@Title('The technician replenish resources in the coffee machine')
 @Narrative('''
 As a technician
-I want to execute the "fill" command in main menu 
-So that I will able to replenish the necessary resources in the coffee machine
+I want to replenish the necessary resources in the coffee machine
+So that the coffee machine can prepare the necessary coffee drinks
 ''')
 @See('https://github.com/rabestro/coffee-machine/wiki/Resources-replenishment')
 class CoffeeMachineReplenishSpec extends Specification {
@@ -30,10 +26,8 @@ class CoffeeMachineReplenishSpec extends Specification {
         }
         def displayUnit = Mock(DisplayUnit)
 
-        and: 'the storage unit is mock'
-        def storageUnit = Mock(StorageUnit)
-
-        and: 'the coffee machine and the control unit are subjects under specification'
+        and: 'the coffee machine, control and storage units are subjects under specification'
+        @Subject def storageUnit = new StorageBlock()
         @Subject def controlUnit = new ControlBlock(displayUnit, storageUnit)
         @Subject def coffeeMachine = new CoffeeMachine(inputUnit, controlUnit)
 
@@ -52,44 +46,37 @@ class CoffeeMachineReplenishSpec extends Specification {
         when: 'the coffee machine processes the very first request'
         coffeeMachine.processRequest()
 
-        then: 'no interaction with storage unit yet'
-        0 * storageUnit._
-
-        and: 'a message appears on the display asking you to enter the volume of water'
+        then: 'a message appears on the display asking you to enter the volume of water'
         1 * displayUnit.accept(ControlState.FillWater.prompt)
 
         when: 'the coffee machine processes the entered amount of water'
         coffeeMachine.processRequest()
 
-        then: 'storage container replenished with the specified volume of water'
-        1 * storageUnit.fill(Resource.Water, water)
-
-        and: 'a message appears on the display asking you to enter the volume of milk'
+        then: 'a message appears on the display asking you to enter the volume of milk'
         1 * displayUnit.accept(ControlState.FillMilk.prompt)
 
         when: 'the coffee machine processes the entered amount of milk'
         coffeeMachine.processRequest()
 
-        then: 'storage container replenished with the specified volume of milk'
-        1 * storageUnit.fill(Resource.Milk, milk)
-
-        and: 'a message appears on the display asking you to enter the number of coffee beans'
+        then: 'a message appears on the display asking you to enter the number of coffee beans'
         1 * displayUnit.accept(ControlState.FillBeans.prompt)
 
         when: 'the coffee machine processes the entered amount of coffee beans'
         coffeeMachine.processRequest()
 
-        then: 'storage container replenished with the specified amount of coffee beans'
-        1 * storageUnit.fill(Resource.CoffeeBeans, beans)
-
-        and: 'a message appears on the display asking you to enter the number of disposable cups'
+        then: 'a message appears on the display asking you to enter the number of disposable cups'
         1 * displayUnit.accept(ControlState.FillCups.prompt)
 
         when: 'the coffee machine processes the entered number of disposable cups'
         coffeeMachine.processRequest()
 
-        then: 'storage container replenished with the specified number of disposable cups'
-        1 * storageUnit.fill(Resource.DisposableCups, cups)
+        then: 'storage container replenished with the specified amount of resources'
+        with(storageUnit) {
+            volume(Resource.Water) == water
+            volume(Resource.Milk) == milk
+            volume(Resource.CoffeeBeans) == beans
+            volume(Resource.DisposableCups) == cups
+        }
 
         and: 'the main menu prompt reappears on the coffee machine display'
         1 * displayUnit.accept(ControlState.MainMenu.prompt)
@@ -98,7 +85,7 @@ class CoffeeMachineReplenishSpec extends Specification {
         water | milk | beans | cups
         0     | 0    | 0     | 0
         400   | 540  | 20    | 9
-        5470  | 0    | 0     | 0
+        5470  | 4323 | 1123  | 34
 
         and: 'command to start the process of replenishing the resources of the coffee machine'
         command = Command.FILL.name()
