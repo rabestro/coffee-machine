@@ -1,7 +1,7 @@
 
 report {
     issueNamePrefix 'Issue #'
-    issueUrlPrefix 'https://github.com/rabestro/coffee-machine/issues'
+    issueUrlPrefix 'https://github.com/rabestro/coffee-machine/issues/'
 }
 
 spockReports {
