@@ -61,32 +61,3 @@ stateDiagram-v2
     Menu --> Take: take
     Menu --> [*] : exit
 ```
-
-## Resources replenishment Sequence diagram
-
-```mermaid
-sequenceDiagram
-    participant CoffeeMachine
-    participant ControlUnit
-    link ControlUnit: source code @ https://github.com/rabestro/coffee-machine/blob/main/src/main/kotlin/lv/id/jc/machine/unit/impl/ControlBlock.kt
-    
-    participant StorageUnit
-    link StorageUnit: source code @ https://github.com/rabestro/coffee-machine/blob/main/src/main/kotlin/lv/id/jc/machine/unit/StorageUnit.kt
-    
-    ControlUnit-->>CoffeeMachine: Write action
-    CoffeeMachine->>+ControlUnit: process "fill"
-    ControlUnit-->>-CoffeeMachine: How many ml of water?
-    CoffeeMachine->>+ControlUnit: process 5000
-    ControlUnit->>+StorageUnit: fill Water, 5000
-    ControlUnit-->>-CoffeeMachine: How many ml of milk?
-    CoffeeMachine->>+ControlUnit: process 3000
-    ControlUnit->>+StorageUnit: fill Milk, 3000
-    ControlUnit-->>-CoffeeMachine: How many grams of coffee beans?
-    CoffeeMachine->>+ControlUnit: process 1275
-    ControlUnit->>+StorageUnit: fill CoffeeBeans, 1275
-    ControlUnit-->>-CoffeeMachine: How many disposable cups?
-    CoffeeMachine->>+ControlUnit: process 28
-    ControlUnit->>+StorageUnit: fill DisposableCaps, 28
-    ControlUnit-->>CoffeeMachine: Write action
-```
-

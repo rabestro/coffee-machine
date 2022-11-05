@@ -6,7 +6,6 @@ import lv.id.jc.machine.model.Resource
 interface StorageUnit {
     fun fill(resource: Resource, volume: Int)
     fun volume(resource: Resource): Int
-    fun missingResources(beverage: Coffee): Set<Resource>
     fun allocateResources(beverage: Coffee)
     fun withdrawCash()
 }
