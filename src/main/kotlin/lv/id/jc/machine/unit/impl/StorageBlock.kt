@@ -9,8 +9,8 @@ class StorageBlock : StorageUnit {
 
     override fun volume(resource: Resource) = containers[resource.ordinal]
 
-    override fun missingResources(coffee: Coffee): Set<Resource> {
-        val requiredResources = coffee.recipe + Pair(Resource.DisposableCups, 1)
+    override fun missingResources(beverage: Coffee): Set<Resource> {
+        val requiredResources = beverage.recipe + Pair(Resource.DisposableCups, 1)
 
         return requiredResources
             .filter { notEnough(it.key, it.value) }
@@ -18,8 +18,15 @@ class StorageBlock : StorageUnit {
             .toSet()
     }
 
-    override fun take(resource: Resource, volume: Int) {
-        containers[resource.ordinal] -= volume
+    override fun allocateResources(beverage: Coffee) {
+        beverage.recipe.forEach {
+            containers[it.key.ordinal] -= it.value
+        }
+        containers[Resource.DisposableCups.ordinal]--
+    }
+
+    override fun withdrawCash() {
+        containers[Resource.Cash.ordinal] = 0
     }
 
     override fun fill(resource: Resource, volume: Int) {
