@@ -6,11 +6,11 @@ import spock.lang.*
 
 import static lv.id.jc.machine.model.Resource.*
 
-@Title('The control device queries for the missing coffee drink ingredients')
+@Title('The storage device reports missing resources')
 @Narrative('''
-As control unit
-I want to know if there are enough ingredients to make a coffee drink
-So that I will know if it is possible to prepare a drink
+As a control unit
+I want to know if there are enough resources in a storage unit to make a coffee drink
+So that I will know if it is possible to prepare a beverage
 ''')
 @Issue('17')
 @See('https://github.com/rabestro/coffee-machine/wiki/Buy-coffee-drink')

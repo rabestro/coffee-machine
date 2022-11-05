@@ -21,8 +21,8 @@ class ControlBlock(
             FillMilk -> { volume -> fill(Resource.Milk, volume, FillBeans) }
             FillBeans -> { volume -> fill(Resource.CoffeeBeans, volume, FillCups) }
             FillCups -> { volume -> fill(Resource.DisposableCups, volume, MainMenu) }
+            BuyCoffee -> ::buyCoffee
             Shutdown -> { _ -> }
-            else -> ::mainMenu
         }(request)
     }
 
@@ -40,12 +40,20 @@ class ControlBlock(
             Command.TAKE -> withdrawCash()
             Command.REMAINING -> storageState()
             Command.EXIT -> switchTo(Shutdown)
+            else -> {}
+        }
+    }
+
+    private fun buyCoffee(request: String) {
+        when (request.uppercase()) {
+            Command.BACK.name -> switchTo(MainMenu)
+            else -> {}
         }
     }
 
     private fun withdrawCash() {
         val cash = storage.volume(Resource.Cash)
-        storage.take(Resource.Cash, cash)
+        storage.withdrawCash()
         display.accept("I gave you \$$cash")
     }
 

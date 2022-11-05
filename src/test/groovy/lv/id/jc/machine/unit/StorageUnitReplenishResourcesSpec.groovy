@@ -14,11 +14,11 @@ As a control unit
 I want to replenish the necessary resources in the coffee machine
 So that the coffee machine can prepare the necessary coffee drinks
 ''')
-class StoreUnitReplenishSpec extends Specification {
+class StorageUnitReplenishResourcesSpec extends Specification {
 
     def 'should replenish the specified resource'() {
 
-        given: 'resource unit with a particular initial volume of resources'
+        given: 'storage unit with a particular initial volume of resources'
         @Subject def storage = new StorageBlock()
 
         with(storage) {
