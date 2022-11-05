@@ -12,4 +12,6 @@ class FakeDisplay : DisplayUnit {
     fun clear() {
         text = ""
     }
+
+    fun content() = text
 }

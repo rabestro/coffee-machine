@@ -37,7 +37,7 @@ class CoffeeMachineShutdownSpec extends Specification {
         coffeeMachine.isOperate()
 
         and: 'the display shows the main menu'
-        fakeDisplay.text == ControlState.MainMenu.prompt
+        fakeDisplay.content() == ControlState.MainMenu.prompt
 
         when: 'the technician enters the command to turn off the machine'
         inputUnit.get() >> command

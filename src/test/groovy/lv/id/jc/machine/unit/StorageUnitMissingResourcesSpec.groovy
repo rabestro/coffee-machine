@@ -16,7 +16,6 @@ So that I will know if it is possible to prepare a drink
 @See('https://github.com/rabestro/coffee-machine/wiki/Buy-coffee-drink')
 class StorageUnitMissingResourcesSpec extends Specification {
 
-    @PendingFeature
     def 'should return the missing resources for the required drink'() {
 
         given: 'a storage unit with a certain amount of resources'
