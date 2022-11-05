@@ -1,9 +1,8 @@
 package lv.id.jc.machine.unit
 
 import lv.id.jc.machine.model.Coffee
-import spock.lang.Narrative
-import spock.lang.Specification
-import spock.lang.Title
+import lv.id.jc.machine.unit.impl.StorageBlock
+import spock.lang.*
 
 import static lv.id.jc.machine.model.Resource.*
 
@@ -13,20 +12,31 @@ As control unit
 I want to know if there are enough ingredients to make a coffee drink
 So that I will know if it is possible to prepare a drink
 ''')
+@Issue('17')
+@See('https://github.com/rabestro/coffee-machine/wiki/Buy-coffee-drink')
 class StorageUnitMissingResourcesSpec extends Specification {
 
+    @PendingFeature
     def 'should return the missing resources for the required drink'() {
 
         given: 'a storage unit with a certain amount of resources'
+        @Subject def storageUnit = new StorageBlock()
 
-        and: 'a control unit with a fake display'
+        with(storageUnit) {
+            fill(Water, water)
+            fill(Milk, milk)
+            fill(CoffeeBeans, beans)
+            fill(DisposableCups, cups)
+        }
 
         when: 'we are querying the storage unit about the missing ingredients for making a coffee drink'
+        def actual = storageUnit.missingResources(drink)
 
         then: 'we get a set containing the missing ingredients'
+        actual == missingResources as Set
 
         where: 'resources in storage device, coffee drink and missing ingredients'
-        water | milk | beans | cups | drink             | required
+        water | milk | beans | cups | drink             | missingResources
         0     | 0    | 0     | 0    | Coffee.Espresso   | [Water, CoffeeBeans, DisposableCups]
         0     | 0    | 0     | 0    | Coffee.Latte      | [Water, Milk, CoffeeBeans, DisposableCups]
         0     | 0    | 0     | 1    | Coffee.Latte      | [Water, Milk, CoffeeBeans]
