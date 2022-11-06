@@ -59,7 +59,7 @@ class ControlBlock(
             storage.allocateResources(beverage)
             "I have enough resources, making you a coffee!"
         } catch (exception: NotEnoughResourcesException) {
-            "Sorry, not enough resources: ${exception.missingResources}"
+            "Sorry, not enough resources: ${exception.missingResources}!"
         }
         display.accept(message)
     }
