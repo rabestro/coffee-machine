@@ -8,6 +8,7 @@ import lv.id.jc.machine.unit.StorageUnit
 import lv.id.jc.machine.unit.impl.ControlBlock
 import lv.id.jc.machine.unit.impl.FakeDisplay
 import spock.lang.Narrative
+import spock.lang.See
 import spock.lang.Specification
 import spock.lang.Subject
 import spock.lang.Title
@@ -18,6 +19,7 @@ As a technician
 I want to execute the "exit" command from the main menu 
 So that I will be able to shut down the coffee machine
 ''')
+@See('https://github.com/rabestro/coffee-machine/wiki/Coffee-Machine-powerOff')
 class CoffeeMachineShutdownSpec extends Specification {
 
     def 'should shut down the coffee machine'() {

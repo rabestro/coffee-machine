@@ -4,6 +4,7 @@ import lv.id.jc.machine.model.Command
 import lv.id.jc.machine.model.ControlState
 import lv.id.jc.machine.unit.impl.ControlBlock
 import spock.lang.Narrative
+import spock.lang.See
 import spock.lang.Specification
 import spock.lang.Subject
 import spock.lang.Title
@@ -14,6 +15,7 @@ As a coffee machine
 I want the control block to process the "fill" command
 So that I will able to replenish the necessary resources in the storage unit
 ''')
+@See('https://github.com/rabestro/coffee-machine/wiki/Resources-replenishment')
 class ControlUnitProcessFillSpec extends Specification {
 
     def 'should process the request for filling resources'() {
