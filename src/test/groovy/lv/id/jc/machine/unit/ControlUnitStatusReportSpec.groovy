@@ -46,7 +46,7 @@ class ControlUnitStatusReportSpec extends Specification {
         controlUnit.process Command.REMAINING.name()
 
         then: 'we get on the display detailed information about the state of the resources'
-        fakeDisplay.content() == report
+        fakeDisplay.contains report
 
         where: 'the volume of resources in the storage unit'
         water | milk | beans | cups | money
