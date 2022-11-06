@@ -1,5 +1,6 @@
 package lv.id.jc.machine.unit.impl
 
+import lv.id.jc.machine.exception.NotEnoughResourcesException
 import lv.id.jc.machine.model.Coffee
 import lv.id.jc.machine.model.Command
 import lv.id.jc.machine.model.ControlState
@@ -8,7 +9,6 @@ import lv.id.jc.machine.model.Resource
 import lv.id.jc.machine.unit.ControlUnit
 import lv.id.jc.machine.unit.DisplayUnit
 import lv.id.jc.machine.unit.StorageUnit
-import java.lang.IllegalArgumentException
 
 class ControlBlock(
     private val display: DisplayUnit,
@@ -42,7 +42,6 @@ class ControlBlock(
             Command.TAKE -> withdrawCash()
             Command.REMAINING -> storageState()
             Command.EXIT -> switchTo(Shutdown)
-            else -> {}
         }
     }
 
@@ -59,8 +58,8 @@ class ControlBlock(
         val message = try {
             storage.allocateResources(beverage)
             "I have enough resources, making you a coffee!"
-        } catch (exception: IllegalArgumentException) {
-            exception.message ?: "Sorry, not enough resources!"
+        } catch (exception: NotEnoughResourcesException) {
+            "Sorry, not enough resources: ${exception.missingResources}"
         }
         display.accept(message)
     }

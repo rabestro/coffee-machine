@@ -1,5 +1,6 @@
 package lv.id.jc.machine.unit.impl
 
+import lv.id.jc.machine.exception.NotEnoughResourcesException
 import lv.id.jc.machine.model.Coffee
 import lv.id.jc.machine.model.Resource
 import lv.id.jc.machine.unit.StorageUnit
@@ -10,8 +11,7 @@ class StorageBlock : StorageUnit {
     override fun volume(resource: Resource) = containers[resource.ordinal]
 
     override fun allocateResources(beverage: Coffee) {
-        val missingResources = missingResources(beverage)
-        require(missingResources.isEmpty()) { "Sorry, not enough resources: $missingResources!" }
+        checkResources(beverage)
 
         beverage.recipe.forEach {
             containers[it.key.ordinal] -= it.value
@@ -26,6 +26,13 @@ class StorageBlock : StorageUnit {
 
     override fun fill(resource: Resource, volume: Int) {
         containers[resource.ordinal] += volume
+    }
+
+    private fun checkResources(beverage: Coffee) {
+        val missingResources = missingResources(beverage)
+        if (missingResources.isNotEmpty()) {
+            throw NotEnoughResourcesException(missingResources.toSet())
+        }
     }
 
     private fun missingResources(beverage: Coffee): List<Resource> {
