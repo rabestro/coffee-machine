@@ -10,19 +10,16 @@ import lv.id.jc.machine.unit.ControlUnit
 import lv.id.jc.machine.unit.DisplayUnit
 import lv.id.jc.machine.unit.StorageUnit
 
-class ControlBlock(
-    private val display: DisplayUnit,
-    private val storage: StorageUnit
-) : ControlUnit {
+class ControlBlock(private val display: DisplayUnit, private val storage: StorageUnit) : ControlUnit {
     private var controlState = Shutdown
 
     override fun process(request: String) {
         when (controlState) {
             MainMenu -> ::mainMenu
-            FillWater -> { volume -> fill(Resource.Water, volume, FillMilk) }
-            FillMilk -> { volume -> fill(Resource.Milk, volume, FillBeans) }
-            FillBeans -> { volume -> fill(Resource.CoffeeBeans, volume, FillCups) }
-            FillCups -> { volume -> fill(Resource.DisposableCups, volume, MainMenu) }
+            FillWater -> fill(Resource.Water, FillMilk)
+            FillMilk -> fill(Resource.Milk, FillBeans)
+            FillBeans -> fill(Resource.CoffeeBeans, FillCups)
+            FillCups -> fill(Resource.DisposableCups, MainMenu)
             BuyCoffee -> ::buyCoffee
             Shutdown -> { _ -> }
         }(request)
@@ -77,8 +74,8 @@ class ControlBlock(
         display.accept(report)
     }
 
-    private fun fill(resource: Resource, volume: String, nextState: ControlState) {
-        storage.fill(resource, volume.toInt())
+    private fun fill(resource: Resource, nextState: ControlState): (String) -> Unit = {
+        storage.fill(resource, it.toInt())
         switchTo(nextState)
     }
 }
