@@ -1,7 +1,7 @@
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=rabestro_coffee-machine&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=rabestro_coffee-machine)
 # Coffee Machine
 
-Implementation of the [educational project](https://hyperskill.org/projects/67?track=18).
+Implementation of an [educational project](https://hyperskill.org/projects/67?track=18) from JetBrains Academy.
 
 ## Reports
 - [Specifications](https://rabestro.github.io/coffee-machine/)
