@@ -1,6 +1,7 @@
 package lv.id.jc.machine.unit
 
 import spock.lang.Narrative
+import spock.lang.See
 import spock.lang.Subject
 import spock.lang.Title
 
@@ -13,6 +14,7 @@ As a control unit
 I want to replenish the necessary resources in the coffee machine
 So that the coffee machine can prepare the necessary coffee drinks
 ''')
+@See('https://github.com/rabestro/coffee-machine/wiki/Resources-replenishment')
 class StorageUnitReplenishResourcesSpec extends UnitSpecification {
 
     def 'should replenish the specified resource'() {

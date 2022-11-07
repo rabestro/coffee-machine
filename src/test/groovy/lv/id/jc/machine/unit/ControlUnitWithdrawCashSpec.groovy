@@ -5,6 +5,7 @@ import lv.id.jc.machine.model.ControlState
 import lv.id.jc.machine.unit.impl.ControlBlock
 import lv.id.jc.machine.unit.impl.StorageBlock
 import spock.lang.Narrative
+import spock.lang.See
 import spock.lang.Specification
 import spock.lang.Subject
 import spock.lang.Title
@@ -17,6 +18,7 @@ As a collector
 I want to withdraws cash for sold coffee drinks
 So that I can bring the collected cash to the accountant
 ''')
+@See('https://github.com/rabestro/coffee-machine/wiki/Withdraw-Cash')
 class ControlUnitWithdrawCashSpec extends Specification {
 
     def 'should turn off the control unit of the coffee machine'() {

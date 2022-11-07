@@ -6,6 +6,7 @@ import lv.id.jc.machine.unit.impl.ControlBlock
 import lv.id.jc.machine.unit.impl.FakeDisplay
 import lv.id.jc.machine.unit.impl.StorageBlock
 import spock.lang.Narrative
+import spock.lang.See
 import spock.lang.Specification
 import spock.lang.Subject
 import spock.lang.Title
@@ -18,6 +19,7 @@ As a coffee machine
 I want to check remaining resources in storage unit
 So that a technician know which resources need to be refilled
 ''')
+@See('https://github.com/rabestro/coffee-machine/wiki/Balance-of-resources')
 class ControlUnitStatusReportSpec extends Specification {
 
     def 'should return the volume of the remaining resources'() {
