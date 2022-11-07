@@ -7,11 +7,7 @@ import lv.id.jc.machine.unit.InputUnit
 import lv.id.jc.machine.unit.StorageUnit
 import lv.id.jc.machine.unit.impl.ControlBlock
 import lv.id.jc.machine.unit.impl.FakeDisplay
-import spock.lang.Narrative
-import spock.lang.See
-import spock.lang.Specification
-import spock.lang.Subject
-import spock.lang.Title
+import spock.lang.*
 
 @Title('The technician executes the "exit" command')
 @Narrative('''
@@ -52,5 +48,24 @@ class CoffeeMachineShutdownSpec extends Specification {
 
         where: 'shutdown command'
         command = Command.EXIT.name()
+    }
+
+    def 'should ignore all requests when in off state'() {
+
+        given: 'control unit spy with dummy display and storage'
+        @Subject def controlUnit = Spy(ControlBlock,
+                constructorArgs: [_ as DisplayUnit, _ as StorageUnit]) as ControlBlock
+
+        expect: 'immediately after creation, the control device is turned off'
+        !controlUnit.isOperate()
+
+        when: 'we are trying to send some request to the control unit'
+        controlUnit.process(_ as String)
+
+        then: 'this request comes to the device'
+        1 * controlUnit.process(_)
+
+        and: 'no action is taking place'
+        0 * _
     }
 }

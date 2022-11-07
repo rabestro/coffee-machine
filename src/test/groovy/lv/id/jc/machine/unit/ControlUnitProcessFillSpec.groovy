@@ -3,11 +3,7 @@ package lv.id.jc.machine.unit
 import lv.id.jc.machine.model.Command
 import lv.id.jc.machine.model.ControlState
 import lv.id.jc.machine.unit.impl.ControlBlock
-import spock.lang.Narrative
-import spock.lang.See
-import spock.lang.Specification
-import spock.lang.Subject
-import spock.lang.Title
+import spock.lang.*
 
 @Title('The coffee machine send the "fill" command')
 @Narrative('''
@@ -33,6 +29,6 @@ class ControlUnitProcessFillSpec extends Specification {
         controlUnit.process Command.FILL.name()
 
         then: 'the display prompts you to enter the volume of water'
-        1 * displayUnit.accept({ it == ControlState.FillWater.prompt })
+        1 * displayUnit.accept(ControlState.FillWater.prompt)
     }
 }

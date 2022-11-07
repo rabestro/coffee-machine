@@ -41,7 +41,7 @@ class ControlUnitStatusReportSpec extends Specification {
         @Subject def controlUnit = new ControlBlock(fakeDisplay, storageUnit)
 
         and: 'we switch to main menu mode and clear the display'
-        controlUnit.switchTo(ControlState.MainMenu)
+        controlUnit.switchTo ControlState.MainMenu
         fakeDisplay.clear()
 
         when: 'we request the current state on the resources of the coffee machine'

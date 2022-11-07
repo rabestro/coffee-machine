@@ -10,7 +10,7 @@ import lv.id.jc.machine.unit.ControlUnit
 import lv.id.jc.machine.unit.DisplayUnit
 import lv.id.jc.machine.unit.StorageUnit
 
-class ControlBlock(private val display: DisplayUnit, private val storage: StorageUnit) : ControlUnit {
+open class ControlBlock(private val display: DisplayUnit, private val storage: StorageUnit) : ControlUnit {
     private var controlState = Shutdown
 
     override fun process(request: String) {
