@@ -1,5 +1,6 @@
 package lv.id.jc.machine.unit
 
+import lv.id.jc.machine.unit.impl.FakeDisplay
 import lv.id.jc.machine.unit.impl.StorageBlock
 import spock.lang.Specification
 
@@ -10,6 +11,8 @@ import static lv.id.jc.machine.model.Resource.Milk
 import static lv.id.jc.machine.model.Resource.Water
 
 class UnitSpecification extends Specification {
+
+    def fakeDisplay = new FakeDisplay()
 
     def storageOf(water, milk, beans, cups, cash = 0) {
         def storageUnit = new StorageBlock()
