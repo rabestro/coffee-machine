@@ -3,6 +3,7 @@ package lv.id.jc.machine.unit
 import lv.id.jc.machine.model.Command
 import lv.id.jc.machine.model.ControlState
 import lv.id.jc.machine.unit.impl.ControlBlock
+import lv.id.jc.machine.unit.impl.FakeDisplay
 import lv.id.jc.machine.unit.impl.StorageBlock
 import spock.lang.Narrative
 import spock.lang.See
@@ -19,35 +20,27 @@ I want to withdraws cash for sold coffee drinks
 So that I can bring the collected cash to the accountant
 ''')
 @See('https://github.com/rabestro/coffee-machine/wiki/Withdraw-Cash')
-class ControlUnitWithdrawCashSpec extends Specification {
+class ControlUnitWithdrawCashSpec extends UnitSpecification {
 
-    def 'should turn off the control unit of the coffee machine'() {
+    def 'should withdraw cash from storage unit'() {
 
         given: 'storage unit with a particular volume of resources'
-        @Subject def storageUnit = new StorageBlock()
+        @Subject def storageUnit = storageOf water, milk, beans, cups, cash
 
-        with(storageUnit) {
-            fill(Water, water)
-            fill(Milk, milk)
-            fill(CoffeeBeans, beans)
-            fill(DisposableCups, cups)
-            fill(Cash, cash)
-        }
+        and: 'control unit with the storage and fake display'
+        @Subject def controlUnit = new ControlBlock(fakeDisplay, storageUnit)
 
-        and: 'mocked display unit'
-        def display = Mock(DisplayUnit)
+        and: 'control unit is in the main menu state'
+        controlUnit.switchTo ControlState.MainMenu
 
-        and: 'control unit with the storage and mocked display'
-        @Subject def controlUnit = new ControlBlock(display, storageUnit)
-
-        and: 'control unit is in main menu state'
-        controlUnit.switchTo(ControlState.MainMenu)
+        and: 'we clear all messages from fake display'
+        fakeDisplay.clear()
 
         when: 'the collector sends a request to withdraw cash from the coffee machine'
         controlUnit.process request
 
         then: 'the display shows conformation message'
-        1 * display.accept({ it == message })
+        fakeDisplay.contains message
 
         and: 'the cash container is empty while other at their original state'
         with(storageUnit) {
