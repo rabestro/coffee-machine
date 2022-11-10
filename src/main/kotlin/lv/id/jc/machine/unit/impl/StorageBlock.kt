@@ -35,12 +35,11 @@ class StorageBlock : StorageUnit {
         }
     }
 
-    private fun missingResources(beverage: Coffee): List<Resource> {
-        val requiredResources = beverage.recipe + Pair(Resource.DisposableCups, 1)
-        return requiredResources
-            .filter { notEnough(it.key, it.value) }
-            .map { it.key }
-    }
+    private fun requiredResources(beverage: Coffee) = beverage.recipe + Pair(Resource.DisposableCups, 1)
+
+    private fun missingResources(beverage: Coffee) = requiredResources(beverage)
+        .filter { notEnough(it.key, it.value) }
+        .map { it.key }
 
     private fun notEnough(resource: Resource, volume: Int) = containers[resource.ordinal] < volume
 }
