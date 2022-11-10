@@ -23,7 +23,7 @@ class ControlUnitProcessFillSpec extends Specification {
         @Subject def controlUnit = new ControlBlock(displayUnit, _ as StorageUnit)
 
         and: 'control unit is in the main menu state'
-        controlUnit.switchTo ControlState.MainMenu
+        controlUnit.powerOn()
 
         when: 'coffee machine sends a request to control unit'
         controlUnit.process Command.FILL.name()

@@ -40,7 +40,7 @@ class ControlUnitBuySpec extends Specification {
         @Subject def controlUnit = new ControlBlock(displayUnit, storageUnit)
 
         and: 'we switch to main menu mode'
-        controlUnit.switchTo(ControlState.MainMenu)
+        controlUnit.powerOn()
 
         when: 'the customer chooses the menu to buy coffee'
         controlUnit.process Command.BUY.name()
@@ -101,7 +101,7 @@ class ControlUnitBuySpec extends Specification {
         @Subject def controlUnit = new ControlBlock(displayUnit, storageUnit)
 
         and: 'we switch to main menu mode'
-        controlUnit.switchTo(ControlState.MainMenu)
+        controlUnit.powerOn()
 
         when: 'the customer chooses the menu to buy coffee'
         controlUnit.process Command.BUY.name()

@@ -25,7 +25,11 @@ open class ControlBlock(private val display: DisplayUnit, private val storage: S
         }(request)
     }
 
-    override fun switchTo(state: ControlState) {
+    override fun powerOn() {
+        switchTo(MainMenu)
+    }
+
+    fun switchTo(state: ControlState) {
         controlState = state
         display.accept(state.prompt)
     }

@@ -25,7 +25,7 @@ class ControlUnitShutdownSpec extends Specification {
         @Subject def controlUnit = new ControlBlock(displayUnit, _ as StorageUnit)
 
         and: 'the control unit is in main menu state'
-        controlUnit.switchTo ControlState.MainMenu
+        controlUnit.powerOn()
 
         expect: 'the control unit works'
         controlUnit.isOperate()
