@@ -31,7 +31,7 @@ class ControlUnitWithdrawCashSpec extends UnitSpecification {
         @Subject def controlUnit = new ControlBlock(fakeDisplay, storageUnit)
 
         and: 'control unit is in the main menu state'
-        controlUnit.switchTo ControlState.MainMenu
+        controlUnit.powerOn()
 
         and: 'we clear all messages from fake display'
         fakeDisplay.clear()
