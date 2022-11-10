@@ -29,12 +29,12 @@ open class ControlBlock(private val display: DisplayUnit, private val storage: S
         switchTo(MainMenu)
     }
 
-    fun switchTo(state: ControlState) {
+    private fun switchTo(state: ControlState) {
         controlState = state
         display.accept(state.prompt)
     }
 
-    override fun isOperate(): Boolean = controlState != Shutdown
+    override fun isOperate() = controlState != Shutdown
 
     private fun mainMenu(request: String) {
         when (Command.valueOf(request.uppercase())) {
