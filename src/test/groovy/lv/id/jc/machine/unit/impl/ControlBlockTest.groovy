@@ -90,6 +90,22 @@ class ControlBlockTest extends Specification {
         400   | 540  | 20    | 9    | 550  | "I gave you \$$cash"
     }
 
+    def 'should process request "fill"'() {
+        given:
+        loadResources water, milk, beans, cups, cash
+
+        when:
+        controlUnit.process Command.FILL.name()
+
+        then:
+        displayUnit.contains ControlState.FillWater.prompt
+
+        where: 'the volume of resources in the storage unit'
+        water | milk | beans | cups | cash
+        0     | 0    | 0     | 0    | 0
+        400   | 540  | 20    | 9    | 550
+    }
+
     def "Process"() {
 
         given:
