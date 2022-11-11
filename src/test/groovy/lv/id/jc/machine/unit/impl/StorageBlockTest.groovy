@@ -5,6 +5,7 @@ import lv.id.jc.machine.model.Coffee
 import lv.id.jc.machine.model.Resource
 import lv.id.jc.machine.tag.UnitTest
 import lv.id.jc.machine.unit.UnitSpecification
+import spock.lang.Subject
 import spock.lang.Title
 
 import java.util.concurrent.ThreadLocalRandom
@@ -12,6 +13,7 @@ import java.util.concurrent.ThreadLocalRandom
 import static lv.id.jc.machine.model.Resource.*
 
 @UnitTest
+@Subject(StorageBlock)
 @Title('Coffee machine storage unit')
 class StorageBlockTest extends UnitSpecification {
 
