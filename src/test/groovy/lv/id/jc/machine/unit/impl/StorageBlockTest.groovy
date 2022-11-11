@@ -3,6 +3,7 @@ package lv.id.jc.machine.unit.impl
 import lv.id.jc.machine.exception.NotEnoughResourcesException
 import lv.id.jc.machine.model.Coffee
 import lv.id.jc.machine.model.Resource
+import lv.id.jc.machine.tag.UnitTest
 import lv.id.jc.machine.unit.UnitSpecification
 import spock.lang.Title
 
@@ -10,6 +11,7 @@ import java.util.concurrent.ThreadLocalRandom
 
 import static lv.id.jc.machine.model.Resource.*
 
+@UnitTest
 @Title('Coffee machine storage unit')
 class StorageBlockTest extends UnitSpecification {
 
@@ -24,7 +26,7 @@ class StorageBlockTest extends UnitSpecification {
                 .every { it == 0 }
     }
 
-    def 'should fill resources'() {
+    def 'should replenish the resource'(Resource resource) {
 
         given: 'newly created storage block'
         def storage = new StorageBlock()
@@ -39,12 +41,8 @@ class StorageBlockTest extends UnitSpecification {
         storage.volume(resource) == replenishment
 
         where: 'resource for replenishment and volume'
-        resource       | replenishment
-        Water          | 8000
-        Milk           | 4500
-        CoffeeBeans    | 1250
-        DisposableCups | 80
-        Cash           | 100
+        resource << Resource.values()
+        replenishment << Resource.values().collect { someAmount() }
     }
 
     def 'should throw an exception if not enough resources for coffee'() {
@@ -112,6 +110,39 @@ class StorageBlockTest extends UnitSpecification {
         8000  | 6800 | 450   | 120  | Coffee.Cappuccino
 
         and: 'cash collected for previously sold coffee'
-        cash = ThreadLocalRandom.current().nextInt(1000)
+        cash = someAmount()
+    }
+
+    def 'should withdraw collected cash'() {
+
+        given: 'a storage device with some resources'
+        def storage = storageOf water, milk, beans, cups, cash
+
+        expect: 'the storage has collected money for sold coffee drinks'
+        storage.volume(Cash) == cash
+
+        when: 'we withdraw cash'
+        storage.withdrawCash()
+
+        then: 'the storage has no more cash'
+        storage.volume(Cash) == 0
+
+        and: 'the amount of all other resources remained unchanged'
+        with(storage) {
+            volume(Water) == water
+            volume(Milk) == milk
+            volume(CoffeeBeans) == beans
+            volume(DisposableCups) == cups
+        }
+
+        where: 'amount of resources in the storage'
+        water | milk | beans | cups | cash
+        250   | 0    | 16    | 1    | 0
+        3750  | 2400 | 98    | 17   | 800
+        600   | 400  | 90    | 0    | 950
+    }
+
+    def someAmount() {
+        ThreadLocalRandom.current().nextInt(1000)
     }
 }
