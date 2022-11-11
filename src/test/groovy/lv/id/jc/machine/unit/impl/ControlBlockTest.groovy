@@ -11,16 +11,14 @@ import spock.lang.Specification
 import spock.lang.Subject
 
 @UnitTest
-@Subject(ControlBlock)
 class ControlBlockTest extends Specification {
     DisplayUnit displayMock = Mock()
     StorageUnit storageMock = Mock()
-    ControlUnit controlUnit
+
+    @Subject
+    ControlUnit controlUnit = new ControlBlock(displayMock, storageMock)
 
     def 'should powerOn control block'() {
-
-        given: 'newly created control block'
-        controlUnit = new ControlBlock(displayMock, storageMock)
 
         expect: 'immediately after creation, the control unit does not work'
         !controlUnit.isOperate()
@@ -37,10 +35,7 @@ class ControlBlockTest extends Specification {
 
     def 'should process request "exit"'() {
 
-        given: 'newly created control block'
-        controlUnit = new ControlBlock(displayMock, storageMock)
-
-        and: 'we turn on the control device'
+        given: 'we turn on the control device'
         controlUnit.powerOn()
 
         when:
@@ -91,7 +86,6 @@ class ControlBlockTest extends Specification {
     def 'should process request "take"'() {
 
         given: 'control block in main menu state'
-        controlUnit = new ControlBlock(displayMock, storageMock)
         controlUnit.powerOn()
 
         when:
@@ -114,7 +108,6 @@ class ControlBlockTest extends Specification {
     def 'should process request "fill"'() {
 
         given: 'control block in main menu state'
-        controlUnit = new ControlBlock(displayMock, storageMock)
         controlUnit.powerOn()
 
         when:
@@ -127,7 +120,6 @@ class ControlBlockTest extends Specification {
     def 'should process request in "fill water" control mode'() {
 
         given: 'control block in fill water state'
-        controlUnit = new ControlBlock(displayMock, storageMock)
         controlUnit.powerOn()
         controlUnit.process Command.FILL.name()
 
@@ -150,7 +142,6 @@ class ControlBlockTest extends Specification {
     def 'should process request in "fill milk" control state'() {
 
         given:
-        controlUnit = new ControlBlock(displayMock, storageMock)
         controlUnit.powerOn()
         controlUnit.process Command.FILL.name()
         controlUnit.process waterVolume
@@ -175,7 +166,6 @@ class ControlBlockTest extends Specification {
 
     def 'should process request in "fill coffee beans" control state'() {
         given:
-        controlUnit = new ControlBlock(displayMock, storageMock)
         controlUnit.powerOn()
 
         and:
@@ -203,9 +193,6 @@ class ControlBlockTest extends Specification {
 
     def 'should process request in "fill disposable cups" control state'() {
         given:
-        controlUnit = new ControlBlock(displayMock, storageMock)
-
-        and:
         controlUnit.powerOn()
         controlUnit.process Command.FILL.name()
         controlUnit.process someVolume
@@ -231,7 +218,6 @@ class ControlBlockTest extends Specification {
 
     def 'should process request "buy"'() {
         given:
-        controlUnit = new ControlBlock(displayMock, storageMock)
         controlUnit.powerOn()
 
         when:
