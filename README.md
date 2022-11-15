@@ -1,6 +1,8 @@
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=rabestro_coffee-machine&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=rabestro_coffee-machine)
 # Coffee Machine
 
+The repository contains sample tests written using the Spock Framework. Tests written to solve an educational project from jetbrains Academy.
+
 The [main objective](https://hyperskill.org/projects/67/stages/365/implement) of [the project](https://hyperskill.org/projects/67?track=18) was to use objects to simulate the operation of real devices. It was necessary to create a class with a method that takes a string as input. Below are quotes from the problem statement:
 
 > Every time the user inputs a string to the console, the program invokes this method with one argument: the line that the user inputs to the console. This system simulates pretty accurately how real-world electronic devices work. External components (like buttons on the coffee machine or tapping on the screen) generate events that pass into the single interface of the program.
