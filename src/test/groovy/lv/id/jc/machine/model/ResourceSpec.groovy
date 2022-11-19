@@ -3,17 +3,21 @@ package lv.id.jc.machine.model
 import spock.lang.Narrative
 import spock.lang.Specification
 import spock.lang.Subject
+import spock.lang.Tag
 import spock.lang.Title
+import spock.lang.Unroll
 
-@Subject(Resource)
 @Title('Resources for coffee drinks')
 @Narrative('''
 As a Coffee Machine
 I need required resources
 So that I can operate and provide testy coffee drinks
 ''')
-class CoffeeMachineResourcesSpec extends Specification {
+@Tag('Sanity')
+@Subject(Resource)
+class ResourceSpec extends Specification {
 
+    @Unroll('should have: #requiredResource')
     def 'should have the all necessary resources'() {
 
         given: 'the set of all resource names'
