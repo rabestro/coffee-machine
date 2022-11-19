@@ -82,4 +82,10 @@ open class ControlBlock(private val display: DisplayUnit, private val storage: S
         storage.fill(resource, it.toInt())
         switchTo(nextState)
     }
+
+    override fun toString(): String {
+        return "ControlBlock($controlState)"
+    }
+
+
 }
