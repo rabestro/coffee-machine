@@ -50,27 +50,4 @@ class CoffeeMachineShutdownSpec extends Specification {
         where: 'shutdown command'
         command = Command.EXIT.name()
     }
-
-    def 'should ignore "#request" when in off state'() {
-        def display = Stub DisplayUnit
-        def storage = Stub StorageUnit
-
-        given: 'control unit spy with dummy display and storage'
-        @Subject def controlUnit = Spy(ControlBlock, constructorArgs: [display, storage]) as ControlBlock
-
-        expect: 'immediately after creation, the control device is turned off'
-        !controlUnit.isOperate()
-
-        when: 'we are trying to send some request to the control unit'
-        controlUnit.process request
-
-        then: 'this request comes to the device'
-        1 * controlUnit.process(request)
-
-        and: 'no action is taking place'
-        0 * _
-
-        where:
-        request << ['buy', 'exit', 'take', 'remaining', '4576']
-    }
 }
