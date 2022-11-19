@@ -16,6 +16,7 @@ repositories {
 dependencies {
     // Spock Framework
     testImplementation 'org.spockframework:spock-core:2.3-groovy-4.0'
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.8.1'
 
     // Spock Reports
     testRuntimeClasspath 'com.athaydes:spock-reports:2.4.0-groovy-4.0'
@@ -26,9 +27,16 @@ dependencies {
 
     // Optional: Spock Extensions
     // spock-mockable allows creation of mocks otherwise un-mockable
-    testImplementation 'io.github.joke:spock-mockable:2.2.0'
+//    testImplementation 'io.github.joke:spock-mockable:2.2.0'
     // Hamcrest matchers
-    testImplementation "org.hamcrest:hamcrest-core:2.2"
+    testImplementation 'org.hamcrest:hamcrest-core:2.2'
+
+    // JUnit 5
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.9.0'
+    // JUnit 5 Parameterized Tests
+    testImplementation 'org.junit.jupiter:junit-jupiter-params:5.9.0'
+    // Mockito
+    testImplementation 'org.mockito:mockito-core:4.8.0'
 }
 
 test {
