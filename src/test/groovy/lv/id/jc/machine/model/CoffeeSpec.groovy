@@ -11,9 +11,9 @@ As a coffee lover
 I want the coffee drink to meet specifications
 So that I will be able to enjoy the beverage
 ''')
-@Subject(Coffee)
-@See('https://hyperskill.org/projects/67/stages/364/implement')
 @Tag('Sanity')
+@Subject(Coffee)
+@See('https://github.com/rabestro/coffee-machine/wiki/Coffee-drinks-specifications')
 class CoffeeSpec extends Specification {
 
     def 'should have the correct recipe for #coffee'() {
@@ -21,7 +21,7 @@ class CoffeeSpec extends Specification {
         expect: 'coffee recipe meets specification'
         coffee.recipe == expectedRecipe
 
-        where: 'the coffee drinks and correct recipe'
+        where: 'the coffee drinks with correct recipe'
         coffee            | expectedRecipe
         Coffee.Espresso   | [(Water): 250, (CoffeeBeans): 16]
         Coffee.Latte      | [(Water): 350, (Milk): 75, (CoffeeBeans): 20]

@@ -11,7 +11,7 @@ import spock.lang.Subject
 import spock.lang.Tag
 import spock.lang.Title
 
-@Title('The technician power on the coffee machine')
+@Title('The technician powers on the coffee machine')
 @Narrative('''
 As a technician
 I want to turn on the coffee machine control unit
@@ -21,8 +21,8 @@ so that the coffee machine can serve coffee lovers
 @See('https://github.com/rabestro/coffee-machine/wiki/Coffee-Machine-powerOn')
 @Tag('Sanity')
 class ControlUnitPowerOnSpec extends Specification {
-    def storageStub = Stub StorageUnit
-    def displayMock = Mock DisplayUnit
+    StorageUnit storageStub = Stub()
+    DisplayUnit displayMock = Mock()
 
     def 'should power on the control unit'() {
 
@@ -30,7 +30,7 @@ class ControlUnitPowerOnSpec extends Specification {
         @Subject
         def controlUnit = new ControlBlock(displayMock, storageStub)
 
-        expect: 'the control unit does not work'
+        expect: 'control unit is switched off and does not work'
         !controlUnit.isOperate()
 
         when: 'we turn on the control unit'

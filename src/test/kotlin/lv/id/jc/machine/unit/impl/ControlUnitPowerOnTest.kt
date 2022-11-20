@@ -23,6 +23,7 @@ internal class ControlUnitPowerOnTest {
     @DisplayName("should power on the control unit")
     fun powerOn() {
         val controlUnit = ControlBlock(displayUnit, storageUnit)
+
         Assumptions.assumeFalse(controlUnit.isOperate())
 
         controlUnit.powerOn()
