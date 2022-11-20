@@ -27,7 +27,8 @@ dependencies {
 
     // Optional: Spock Extensions
     // spock-mockable allows creation of mocks otherwise un-mockable
-//    testImplementation 'io.github.joke:spock-mockable:2.2.0'
+    // testImplementation 'io.github.joke:spock-mockable:2.2.0'
+
     // Hamcrest matchers
     testImplementation 'org.hamcrest:hamcrest-core:2.2'
 
@@ -44,10 +45,15 @@ test {
 
     finalizedBy jacocoTestReport
     testLogging {
-        events "passed", "skipped", "failed"
+        events 'passed', 'skipped', 'failed'
     }
 }
 
+task sanityTest(type: Test) {
+    useJUnitPlatform {
+        includeTags 'Sanity'
+    }
+}
 
 compileKotlin {
     kotlinOptions.jvmTarget = '1.8'
