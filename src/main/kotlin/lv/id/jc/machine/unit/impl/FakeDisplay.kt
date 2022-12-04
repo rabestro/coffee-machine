@@ -3,15 +3,17 @@ package lv.id.jc.machine.unit.impl
 import lv.id.jc.machine.unit.DisplayUnit
 
 class FakeDisplay : DisplayUnit {
-    var text = ""
+    var content = ""
+    var lastLine = ""
 
-    override fun accept(info: String) {
-        text += info + System.lineSeparator()
+    override fun accept(line: String) {
+        lastLine = line
+        content += line + System.lineSeparator()
     }
 
     fun clear() {
-        text = ""
+        content = ""
     }
 
-    fun contains(value: String) = text.trim().contains(value.trim())
+    fun contains(value: String) = content.trim().contains(value.trim())
 }
