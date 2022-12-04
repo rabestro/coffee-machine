@@ -4,14 +4,13 @@ import lv.id.jc.machine.model.ControlState;
 import lv.id.jc.machine.unit.DisplayUnit;
 import lv.id.jc.machine.unit.StorageUnit;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 //@Tag("Sanity")
-final class ControlBlockTest {
+final class ControlBlockDirtyTest {
     private StorageUnit storageUnit;
     private DisplayUnit displayUnit;
 

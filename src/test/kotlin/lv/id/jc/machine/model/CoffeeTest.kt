@@ -1,6 +1,7 @@
 package lv.id.jc.machine.model
 
 import org.junit.jupiter.api.Assertions
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.TestInstance
 import org.junit.jupiter.params.ParameterizedTest
@@ -12,6 +13,7 @@ import java.util.stream.Stream
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 internal class CoffeeTest {
 
+    @Disabled
     @ParameterizedTest(name = "should have the correct recipe for {0}")
     @MethodSource("provideRecipes")
     @DisplayName("should have the correct recipe for coffee")

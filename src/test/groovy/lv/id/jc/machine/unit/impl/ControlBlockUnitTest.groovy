@@ -10,8 +10,11 @@ import lv.id.jc.machine.unit.StorageUnit
 import spock.lang.Specification
 import spock.lang.Subject
 
+/**
+ * Classic approach when we write one test class for one java class.
+ */
 @UnitTest
-class ControlBlockTest extends Specification {
+class ControlBlockUnitTest extends Specification {
     DisplayUnit displayMock = Mock()
     StorageUnit storageMock = Mock()
 
