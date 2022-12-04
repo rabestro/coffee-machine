@@ -16,14 +16,13 @@ repositories {
 dependencies {
     // Spock Framework
     testImplementation 'org.spockframework:spock-core:2.3-groovy-4.0'
-    testImplementation 'org.junit.jupiter:junit-jupiter:5.8.1'
 
     // Spock Reports
-    testRuntimeClasspath 'com.athaydes:spock-reports:2.4.0-groovy-4.0'
+    testRuntimeOnly 'com.athaydes:spock-reports:2.4.0-groovy-4.0'
 
     // Simple Logging Facade (required for spock-reports)
     testImplementation 'org.slf4j:slf4j-api:2.0.3'
-    testRuntimeClasspath 'org.slf4j:slf4j-simple:2.0.3'
+    testRuntimeOnly 'org.slf4j:slf4j-simple:2.0.3'
 
     // Optional: Spock Extensions
     // spock-mockable allows creation of mocks otherwise un-mockable
