@@ -12,6 +12,9 @@ import java.util.concurrent.ThreadLocalRandom
 
 import static lv.id.jc.machine.model.Resource.*
 
+/**
+ * Classic approach when we write one test class for one java class.
+ */
 @UnitTest
 @Subject(StorageBlock)
 @Title('Coffee machine storage unit')
