@@ -1,14 +1,13 @@
-package lv.id.jc.machine.unit.impl
+package lv.id.jc.machine.unit
 
 import lv.id.jc.machine.model.ControlState
-import lv.id.jc.machine.unit.DisplayUnit
-import lv.id.jc.machine.unit.StorageUnit
+import lv.id.jc.machine.unit.impl.ControlBlock
 import org.junit.jupiter.api.*
 import org.junit.jupiter.api.Assertions.*
 import org.mockito.Mockito
 
-@Tag("Sanity")
-@DisplayName("The technician power on the control unit")
+//@Tag("Sanity")
+@DisplayName("The technician powers on coffee machine")
 internal class ControlUnitPowerOnTest {
     private lateinit var storageUnit: StorageUnit
     private lateinit var displayUnit: DisplayUnit
@@ -20,8 +19,7 @@ internal class ControlUnitPowerOnTest {
     }
 
     @Test
-    @DisplayName("should power on the control unit")
-    fun powerOn() {
+    fun `pressing the button on a non-working control unit`() {
         val controlUnit = ControlBlock(displayUnit, storageUnit)
 
         Assumptions.assumeFalse(controlUnit.isOperate())
